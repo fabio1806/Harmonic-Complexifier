@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <title>Harmonic Complexifier</title>
+    <link rel="stylesheet" href="harmonic_complexifier.css">
+    <link rel="icon" href="./logo/logo_0.5x.png">
+  </head>
+  <body>
+    <img class="logo" src="./logo/logo.png" alt="Harmonic Complexifier logo">
+    <div id="root">
+      <h1>Harmonic Complexifier</h1>
+      <div id="inputSel">
+        <button id="keySwitch" onclick="switchToKeyboard();">Keyboard</button>
+        <button id="btnSwitch" onclick="switchToButtons();">Buttons</button>
+      </div>
+      <div id="keySel">
+        <h2>Key</h2>
+          <button v-for="key in keys"
+                    v-on:click="activate(key, keys)" v-bind:class="{activated: key.active}">
+                    {{ key.text }}</button>
+      </div>
+      <div id="buttons" style="display: none">
+        <h2>Notes</h2>
+        <div id="firstIn">
+          <button v-for="note in notes"
+                    v-on:click="activate(note, notes)" v-bind:class="{activated: note.active}">
+                    {{ note.text }}</button>
+        </div>
+        <h2>Chords</h2>
+        <div id="secondIn">
+          <button v-for="chord in chords"
+                  v-on:click="activate(chord, chords)" v-bind:class="{activated: chord.active}">
+                  {{ chord.text }}</button>
+        </div>
+        <h2>Duration</h2>
+        <div id="thirdIn">
+          <button v-for="time in durations"
+                  v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
+                  {{ time.text }}</button>
+        </div>
+      </div>
+      <div id="keyboard" style="display: none">
+        <div id="Wkeys">
+          <div class="white key">
+            <div class="text bianco">z</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">x</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">c</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">v</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">b</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">n</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">m</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">,</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">q</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">w</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">e</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">r</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">t</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">y</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">u</div>
+          </div>
+          <div class="white key">
+            <div class="text bianco">i</div>
+          </div>
+        </div>
+        <div id="Bkeys">
+          <div class="black key">
+            <div class="text nero">s</div>
+          </div>
+          <div class="black key">
+            <div class="text nero">d</div>
+          </div>
+          <div class="space"></div>
+          <div class="black key">
+            <div class="text nero">g</div>
+          </div>
+          <div class="black key">
+            <div class="text nero">h</div>
+          </div>
+          <div class="black key">
+            <div class="text nero">j</div>
+          </div>
+          <div class="space"></div>
+          <div class="space"></div>
+          <div class="black key">
+            <div class="text nero">2</div>
+          </div>
+          <div class="black key">
+            <div class="text nero">3</div>
+          </div>
+          <div class="space"></div>
+          <div class="black key">
+            <div class="text nero">5</div>
+          </div>
+          <div class="black key">
+            <div class="text nero">6</div>
+          </div>
+          <div class="black key">
+            <div class="text nero">7</div>
+          </div>
+        </div>
+        <div class="reverse">
+          <div id="Wkeys">
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+            <div class="white key">
+              <div class="text bianco"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="stdin">
+        <div class="input" v-for="message in stdin">{{ message }}</div>
+      </div>
+      <div id="preview">
+        <div>{{ preview.message }}</div>
+        <i class="fa fa-plus-square" onclick="addToStdin();"></i>
+      </div>
+    </div>
+    <div id="caption">
+      <h4>Captions</h4>
+      <ul>
+        <li v-for="cap in captions">{{ cap.text }}</li>
+      </ul>
+    </div>
+    <button id="run"><i class="fa fa-cogs" aria-hidden="true"></i> Run</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript" src="harmonic_complexifier.js"></script>
+  </body>
+</html>

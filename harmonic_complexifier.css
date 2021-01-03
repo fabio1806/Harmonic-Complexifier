@@ -1,0 +1,225 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "https://fonts.googleapis.com/css2?family=Redressed&display=swap";
+
+* {
+  user-select: none;
+}
+
+body {
+  background-image: url("Abstract_background.jpg");
+  height: 100vh;
+  overflow: hidden;
+}
+
+.logo {
+  position:absolute;
+  top: 25px;
+  left: 70px;
+  width: 100px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Redressed';
+  font-size: 45px;
+  letter-spacing: 4px;
+}
+
+h2 {
+  margin: 30px 0px 10px 25px;
+}
+
+button {
+  display: inline-block;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  border-bottom: 2px solid #263656;
+  font-size: 16px;
+  margin-right: 5px;
+  outline: none;
+}
+
+button:hover{
+  background-color: lightgreen;
+}
+
+button:active{
+  position: relative;
+  top: 1px;
+}
+
+#root {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+div#inputSel {
+  position: relative;
+  width: 220px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+div#inputSel button {
+  width: 100px;
+  height:30px;
+}
+
+div#keySel button, div#buttons button {
+  width: 45px;
+  height: 30px;
+  padding: 0px;
+}
+
+.activated{
+  background: lightgreen;
+  border: 1px solid green;
+}
+
+#keyboard {
+  width: 1136px;
+  height: 300px;
+  position: relative;
+  top: 80px;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 20px;
+}
+
+#Wkeys{
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+#Bkeys{
+  position: absolute;
+  left: 53px;
+  top: 0px;
+}
+
+.key {
+  display: inline-block;
+  margin: 0px;
+}
+
+.white {
+  background-color: white;
+  width: 65px;
+  height: 200px;
+  border: 1px solid black;
+  z-index: -1;
+}
+
+.black {
+  background-color: black;
+  width: 35px;
+  height: 110px;
+  margin-right:32px;
+}
+
+.text {
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.bianco {
+  background-color: lightgreen;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  top: 130px;
+  line-height: 50px;
+}
+
+.nero {
+  background-color: lightgrey;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 70%;
+  line-height: 20px;
+}
+
+.space {
+  display: inline-block;
+  margin-left: 67px;
+}
+
+.reverse {
+  margin-top: 2px;
+  -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,0.1)), to(rgba(0,0,0,0)));
+  transform: rotate(180deg);
+  height: 60px;
+}
+
+#preview {
+  display: none;
+  border-radius: 10px;
+  width: 200px;
+  height: 48px;
+  line-height: 48px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
+  position: absolute;
+  right: 0;
+  bottom: 310px;
+  transform: translate(0, -50%);
+  padding-left: 15px;
+  font-size: 24px;
+}
+
+.fa-plus-square {
+  cursor: pointer;
+  position: absolute;
+  bottom: 13px;
+  right:10px;
+}
+
+.fa-plus-square:active {
+  transform: translate(0px, 1px);
+  color: #131313
+}
+
+#stdin {
+  display: none;
+  color: whitesmoke;
+  position: absolute;
+  bottom: 60px;
+  height: 25%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.8);
+  font-size: 18px;
+}
+
+.input {
+  display: inline-block;
+  margin: 5px;
+}
+
+#caption {
+  padding: 5px 10px;
+  border: 1px solid blue;
+  position: absolute;
+  left: 50px;
+  top: 170px;
+}
+
+#run {
+  background-color: #355858;
+  width: 60px;
+  border-radius: 5px;
+  position: relative;
+  top: 90%;
+  left: 90%;
+}
+
+#run:active {
+  transform: translate(0px, 1px);
+  border: none;
+}
