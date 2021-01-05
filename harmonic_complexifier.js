@@ -104,14 +104,14 @@ var chords = new Vue({
 
     preview:    { message: '' },
 
+    error:      [],
+
     stdin:      []
 
   },
 
   methods: {
     activate: function(el, dataName) {
-
-      console.log(el)
 
       dataName.forEach((i) => {
         i.active = false;
@@ -124,6 +124,7 @@ var chords = new Vue({
 
     createNotes: function(el) {
       chords.notes = [];
+      chords.preview.message = '';
       for (var i=0; i < chords.keys.length; i++) {
         chords.notes.push(
           { text: chords.keys[(i + chords.keys.findIndex(key => key.text === el.text)) % chords.keys.length].text,
@@ -172,14 +173,35 @@ function inText() {
 function addToStdin() {
   previewText = inText()
   if (previewText != ''){
-    chords.stdin.push(previewText);
-    console.log("Added");
+    if (chords.notes.find( (el) => el.active == true) == null) {
+      chords.error.push('Note missing: select a note before add a new element');
+      setTimeout(() => { chords.error.pop(); }, 3000)
+    }
+
+    else if (chords.chords.find( (el) => el.active == true) == null ) {
+      chords.error.push('Chord missing: select a chord before add a new element');
+      setTimeout(() => { chords.error.pop(); }, 3000)
+    }
+
+    else if (chords.durations.find( (el) => el.active == true) == null ) {
+      chords.error.push('Duration missing: select a duration before add a new element');
+      setTimeout(() => { chords.error.pop(); }, 3000)
+    }
+
+    else {
+      chords.stdin.push(previewText);
+      console.log("Added");
+    }
   }
   else {
-    console.log("Empty input")
+    chords.error.push("Empty input")
+    setTimeout(() => { chords.error.pop(); }, 3000)
   }
 }
 
+function undoIn() {
+  chords.stdin.pop();
+}
 
 function switchToKeyboard() {
   buttons.style.display   = 'none';

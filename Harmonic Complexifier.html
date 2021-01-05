@@ -108,7 +108,6 @@
             <div class="text nero">j</div>
           </div>
           <div class="space"></div>
-          <div class="space"></div>
           <div class="black key">
             <div class="text nero">2</div>
           </div>
@@ -181,11 +180,13 @@
       </div>
       <div id="stdin">
         <div class="input" v-for="text in stdin">{{ text }}</div>
+        <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
       </div>
       <div id="preview">
         <div>{{ preview.message }}</div>
         <i class="fa fa-plus-square" onclick="addToStdin();"></i>
       </div>
+      <div id="error" v-for="err in error">{{ err }}</div>
     </div>
     <div id="caption">
       <h4>Captions</h4>

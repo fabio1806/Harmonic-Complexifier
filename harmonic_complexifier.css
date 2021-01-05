@@ -45,8 +45,7 @@ button:hover{
 }
 
 button:active{
-  position: relative;
-  top: 1px;
+  transform: translate(0px, 1px);
 }
 
 #root {
@@ -84,7 +83,7 @@ div#keySel button, div#buttons button {
   width: 1065px;
   height: 300px;
   position: relative;
-  top: 80px;
+  top: 50px;
   left: 50%;
   transform: translate(-50%);
   margin-top: 20px;
@@ -104,6 +103,8 @@ div#keySel button, div#buttons button {
 .key {
   display: inline-block;
   margin: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .white {
@@ -185,6 +186,15 @@ div#keySel button, div#buttons button {
   color: #131313
 }
 
+#error {
+  width: 150px;
+  color: red;
+  font-size: 14px;
+  position: relative;
+  left: 101%;
+  bottom: 6px;
+}
+
 #stdin {
   display: none;
   color: whitesmoke;
@@ -195,6 +205,14 @@ div#keySel button, div#buttons button {
   background: rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.8);
   font-size: 18px;
+}
+
+#undoBtn {
+  background-color: #355858;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  right: 1%;
 }
 
 .input {
@@ -217,9 +235,4 @@ div#keySel button, div#buttons button {
   position: relative;
   top: 90%;
   left: 90%;
-}
-
-#run:active {
-  transform: translate(0px, 1px);
-  border: none;
 }
