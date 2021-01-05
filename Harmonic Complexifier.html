@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Harmonic Complexifier</title>
@@ -17,14 +17,16 @@
       <div id="keySel">
         <h2>Key</h2>
           <button v-for="key in keys"
-                    v-on:click="activate(key, keys)" v-bind:class="{activated: key.active}">
+                    v-on:click="activate(key, keys); createNotes(key);"
+                    v-bind:class="{activated: key.active}">
                     {{ key.text }}</button>
       </div>
       <div id="buttons" style="display: none">
         <h2>Notes</h2>
         <div id="firstIn">
           <button v-for="note in notes"
-                    v-on:click="activate(note, notes)" v-bind:class="{activated: note.active}">
+                    v-on:click="activate(note, notes)"
+                    v-bind:class="{activated: note.active}">
                     {{ note.text }}</button>
         </div>
         <h2>Chords</h2>
@@ -62,9 +64,6 @@
           </div>
           <div class="white key">
             <div class="text bianco">m</div>
-          </div>
-          <div class="white key">
-            <div class="text bianco">,</div>
           </div>
           <div class="white key">
             <div class="text bianco">q</div>

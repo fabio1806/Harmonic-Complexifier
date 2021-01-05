@@ -1,5 +1,5 @@
 const BASE_FREQ = 261.63                              //frequency of C4
-keys            = "zsxdcvgbhnjm,q2w3er5t6y7ui";
+keys            = "zsxdcvgbhnjmq2w3er5t6y7ui";
 
 const keySel = document.getElementById("keySel");
 
@@ -111,6 +111,8 @@ var chords = new Vue({
   methods: {
     activate: function(el, dataName) {
 
+      console.log(el)
+
       dataName.forEach((i) => {
         i.active = false;
       });
@@ -118,6 +120,17 @@ var chords = new Vue({
       el.active = true;
 
       chords.preview.message = inText();
+    },
+
+    createNotes: function(el) {
+      chords.notes = [];
+      for (var i=0; i < chords.keys.length; i++) {
+        chords.notes.push(
+          { text: chords.keys[(i + chords.keys.findIndex(key => key.text === el.text)) % chords.keys.length].text,
+            active: false
+          }
+        )
+      }
     }
   }
 })
@@ -199,5 +212,4 @@ document.onkeyup = function(e) {
     stopNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
 }
 
-switchToButtons();
 resume()
