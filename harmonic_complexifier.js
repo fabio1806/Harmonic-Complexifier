@@ -123,6 +123,14 @@ var chords = new Vue({
     },
 
     createNotes: function(el) {
+      chords.chords.forEach((i) => {
+        i.active = false;
+      });
+
+      chords.durations.forEach((i) => {
+        i.active = false;
+      });
+
       chords.notes = [];
       chords.preview.message = '';
       for (var i=0; i < chords.keys.length; i++) {
