@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>Harmonic Complexifier</title>
     <link rel="stylesheet" href="harmonic_complexifier.css">
-    <link rel="icon" href="./logo/logo_0.5x.png">
+    <link rel="icon" href="./img/logo.png">
   </head>
   <body>
-    <img class="logo" src="./logo/logo.png" alt="Harmonic Complexifier logo">
+    <img class="logo" src="./img/logo.png" alt="Harmonic Complexifier logo">
     <div id="root">
       <h1>Harmonic Complexifier</h1>
       <div id="inputSel">
@@ -181,7 +181,7 @@
         </div>
       </div>
       <div id="stdin">
-        <div class="input" v-for="message in stdin">{{ message }}</div>
+        <div class="input" v-for="text in stdin">{{ text }}</div>
       </div>
       <div id="preview">
         <div>{{ preview.message }}</div>

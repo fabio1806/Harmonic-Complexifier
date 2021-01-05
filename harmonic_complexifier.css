@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url("Abstract_background.jpg");
+  background-image: url("./img/Abstract_background.jpg");
   height: 100vh;
   overflow: hidden;
 }
