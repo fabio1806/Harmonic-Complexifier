@@ -97,7 +97,7 @@ div#keySel button, div#buttons button {
 #Bkeys{
   position: absolute;
   left: 53px;
-  top: 0px;
+  top: 2px;
 }
 
 .key {
@@ -105,6 +105,7 @@ div#keySel button, div#buttons button {
   margin: 0px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  cursor: pointer;
 }
 
 .white {
@@ -115,11 +116,21 @@ div#keySel button, div#buttons button {
   z-index: -1;
 }
 
+.white.key:active{
+  background-color: lightgreen;
+  height: 198px;
+}
+
 .black {
   background-color: black;
   width: 35px;
   height: 110px;
   margin-right:32px;
+}
+
+.black.key:active{
+  background-color: lightgrey;
+  height: 108px;
 }
 
 .text {
@@ -164,7 +175,7 @@ div#keySel button, div#buttons button {
   width: 200px;
   height: 48px;
   line-height: 48px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid black;
   position: absolute;
   right: 0;
@@ -190,9 +201,9 @@ div#keySel button, div#buttons button {
   width: 150px;
   color: red;
   font-size: 14px;
-  position: relative;
-  left: 101%;
-  bottom: 6px;
+  position: absolute;
+  right: -155px;
+  bottom: 340px;
 }
 
 #stdin {

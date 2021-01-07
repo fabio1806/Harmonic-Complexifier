@@ -183,17 +183,17 @@ function addToStdin() {
   if (previewText != ''){
     if (chords.notes.find( (el) => el.active == true) == null) {
       chords.error.push('Note missing: select a note before add a new element');
-      setTimeout(() => { chords.error.pop(); }, 3000)
+      setTimeout(() => { chords.error.shift(); }, 3000)
     }
 
     else if (chords.chords.find( (el) => el.active == true) == null ) {
       chords.error.push('Chord missing: select a chord before add a new element');
-      setTimeout(() => { chords.error.pop(); }, 3000)
+      setTimeout(() => { chords.error.shift(); }, 3000)
     }
 
     else if (chords.durations.find( (el) => el.active == true) == null ) {
       chords.error.push('Duration missing: select a duration before add a new element');
-      setTimeout(() => { chords.error.pop(); }, 3000)
+      setTimeout(() => { chords.error.shift(); }, 3000)
     }
 
     else {
@@ -203,7 +203,7 @@ function addToStdin() {
   }
   else {
     chords.error.push("Empty input")
-    setTimeout(() => { chords.error.pop(); }, 3000)
+    setTimeout(() => { chords.error.shift(); }, 3000)
   }
 }
 
@@ -231,10 +231,17 @@ function switchToButtons() {
   document.getElementById("btnSwitch").classList.add("activated");
 }
 
+function playKey(e) {
+  if (keyboard.style.display == 'block' && keys.indexOf(e) != -1){
+    freq = BASE_FREQ * Math.pow(2, keys.indexOf(e)/12);
+    playNote(freq);
+    setTimeout(stopNote(freq), 2000);
+  }
+}
+
 document.onkeydown = function(e) {
   if (keyboard.style.display == 'block' && !e.repeat && keys.indexOf(e.key) != -1)
     playNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
-
 }
 
 document.onkeyup = function(e) {

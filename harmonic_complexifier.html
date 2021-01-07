@@ -44,84 +44,84 @@
       </div>
       <div id="keyboard" style="display: none">
         <div id="Wkeys">
-          <div class="white key">
+          <div class="white key" onclick="playKey('z');">
             <div class="text bianco">z</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('x');">
             <div class="text bianco">x</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('c');">
             <div class="text bianco">c</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('v');">
             <div class="text bianco">v</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('b');">
             <div class="text bianco">b</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('n');">
             <div class="text bianco">n</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('m');">
             <div class="text bianco">m</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('q');">
             <div class="text bianco">q</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('w');">
             <div class="text bianco">w</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('e');">
             <div class="text bianco">e</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('r');">
             <div class="text bianco">r</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('t');">
             <div class="text bianco">t</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('y');">
             <div class="text bianco">y</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('u');">
             <div class="text bianco">u</div>
           </div>
-          <div class="white key">
+          <div class="white key" onclick="playKey('i');">
             <div class="text bianco">i</div>
           </div>
         </div>
         <div id="Bkeys">
-          <div class="black key">
+          <div class="black key" onclick="playKey('s');">
             <div class="text nero">s</div>
           </div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('d');">
             <div class="text nero">d</div>
           </div>
           <div class="space"></div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('g');">
             <div class="text nero">g</div>
           </div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('h');">
             <div class="text nero">h</div>
           </div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('j');">
             <div class="text nero">j</div>
           </div>
           <div class="space"></div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('2');">
             <div class="text nero">2</div>
           </div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('3');">
             <div class="text nero">3</div>
           </div>
           <div class="space"></div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('5');">
             <div class="text nero">5</div>
           </div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('6');">
             <div class="text nero">6</div>
           </div>
-          <div class="black key">
+          <div class="black key" onclick="playKey('7');">
             <div class="text nero">7</div>
           </div>
         </div>
@@ -186,7 +186,9 @@
         <div>{{ preview.message }}</div>
         <i class="fa fa-plus-square" onclick="addToStdin();"></i>
       </div>
-      <div id="error" v-for="err in error">{{ err }}</div>
+      <div id="error">
+        <div v-for="err in error">{{ err }}</div>
+      </div>
     </div>
     <div id="caption">
       <h4>Captions</h4>
