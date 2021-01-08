@@ -49,6 +49,40 @@ var chords = new Vue({
 
   data: {
 
+    Wkeys:      [
+                  {text: 'z', clicked: false},
+                  {text: 'x', clicked: false},
+                  {text: 'c', clicked: false},
+                  {text: 'v', clicked: false},
+                  {text: 'b', clicked: false},
+                  {text: 'n', clicked: false},
+                  {text: 'm', clicked: false},
+                  {text: 'q', clicked: false},
+                  {text: 'w', clicked: false},
+                  {text: 'e', clicked: false},
+                  {text: 'r', clicked: false},
+                  {text: 't', clicked: false},
+                  {text: 'y', clicked: false},
+                  {text: 'u', clicked: false},
+                  {text: 'i', clicked: false},
+                ],
+
+    Bkeys:      [
+                  {text: 's', activeClass: 'black key', clicked: false},
+                  {text: 'd', activeClass: 'black key', clicked: false},
+                  {text: '',  activeClass: 'space',     clicked: false},
+                  {text: 'g', activeClass: 'black key', clicked: false},
+                  {text: 'h', activeClass: 'black key', clicked: false},
+                  {text: 'j', activeClass: 'black key', clicked: false},
+                  {text: '',  activeClass: 'space',     clicked: false},
+                  {text: '2', activeClass: 'black key', clicked: false},
+                  {text: '3', activeClass: 'black key', clicked: false},
+                  {text: '',  activeClass: 'space',     clicked: false},
+                  {text: '5', activeClass: 'black key', clicked: false},
+                  {text: '6', activeClass: 'black key', clicked: false},
+                  {text: '7', activeClass: 'black key', clicked: false},
+                ],
+
     keys:       [
                   {text:'C',  active: false},
                   {text:'C#', active: false},
@@ -140,6 +174,18 @@ var chords = new Vue({
           }
         )
       }
+    },
+
+    playKey: function(el) {
+      if (document.getElementById("keyboard").style.display == 'block' && keys.indexOf(el.text) != -1 && !el.clicked){
+        freq = BASE_FREQ * Math.pow(2, keys.indexOf(el.text)/12);
+        playNote(freq);
+        setTimeout(stopNote(freq), 2000);
+      }
+    },
+
+    activeKey: function(el) {
+      el.clicked = !el.clicked;
     }
   }
 })
@@ -215,10 +261,24 @@ function switchToKeyboard() {
   buttons.style.display   = 'none';
   keyboard.style.display  = 'block';
   stdin.style.display     = 'block';
-  preview.style.display   = 'none';
+  preview.style.display   = 'block';
   console.log("Switched to keyboard input");
   document.getElementById("keySwitch").classList.add("activated");
   document.getElementById("btnSwitch").classList.remove("activated");
+
+  chords.notes.forEach((i) => {
+    i.active = false;
+  });
+
+  chords.chords.forEach((i) => {
+    i.active = false;
+  });
+
+  chords.durations.forEach((i) => {
+    i.active = false;
+  });
+
+  chords.preview.message = '';
 }
 
 function switchToButtons() {
@@ -231,12 +291,12 @@ function switchToButtons() {
   document.getElementById("btnSwitch").classList.add("activated");
 }
 
-function playKey(e) {
-  if (keyboard.style.display == 'block' && keys.indexOf(e) != -1){
-    freq = BASE_FREQ * Math.pow(2, keys.indexOf(e)/12);
-    playNote(freq);
-    setTimeout(stopNote(freq), 2000);
-  }
+function playKey(key, e) {
+
+}
+
+function runCode() {
+
 }
 
 document.onkeydown = function(e) {

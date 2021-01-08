@@ -80,7 +80,7 @@ div#keySel button, div#buttons button {
 }
 
 #keyboard {
-  width: 1065px;
+  width: 1025px;
   height: 300px;
   position: relative;
   top: 50px;
@@ -97,7 +97,7 @@ div#keySel button, div#buttons button {
 #Bkeys{
   position: absolute;
   left: 53px;
-  top: 2px;
+  top: -3px;
 }
 
 .key {
@@ -114,9 +114,10 @@ div#keySel button, div#buttons button {
   height: 200px;
   border: 1px solid black;
   z-index: -1;
+  margin-left: 1px;
 }
 
-.white.key:active{
+.white.key.active{
   background-color: lightgreen;
   height: 198px;
 }
@@ -128,7 +129,7 @@ div#keySel button, div#buttons button {
   margin-right:32px;
 }
 
-.black.key:active{
+.black.key.active{
   background-color: lightgrey;
   height: 108px;
 }
@@ -159,7 +160,8 @@ div#keySel button, div#buttons button {
 
 .space {
   display: inline-block;
-  margin-left: 67px;
+  margin-left: 51px;
+  visibility: hidden;
 }
 
 .reverse {
@@ -179,7 +181,7 @@ div#keySel button, div#buttons button {
   border: 1px solid black;
   position: absolute;
   right: 0;
-  bottom: 310px;
+  bottom: 280px;
   transform: translate(0, -50%);
   padding-left: 15px;
   font-size: 24px;
@@ -203,7 +205,7 @@ div#keySel button, div#buttons button {
   font-size: 14px;
   position: absolute;
   right: -155px;
-  bottom: 340px;
+  bottom: 310px;
 }
 
 #stdin {
