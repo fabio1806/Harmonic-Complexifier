@@ -44,12 +44,15 @@
       </div>
       <div id="keyboard" style="display: none">
         <div id="Wkeys">
-          <div class="white key" v-for="key in Wkeys" v-bind:class="{active: key.clicked}" v-on:click="playKey(key); activeKey(key)">
+          <div class="white key"  v-for="key in Wkeys"
+                                  v-bind:class="{active: key.clicked}"
+                                  v-on:click="playKey(key); activeKey(key)">
             <div class="text bianco">{{ key.text }}</div>
           </div>
         </div>
         <div id="Bkeys">
-          <div v-for="key in Bkeys" v-bind:class="[key.activeClass, {active: key.clicked}]" v-on:click="playKey(key); activeKey(key)">
+          <div v-for="key in Bkeys" v-bind:class="[key.activeClass, {active: key.clicked}]"
+                                    v-on:click="playKey(key); activeKey(key)">
             <div class="text nero">{{ key.text }}</div>
           </div>
         </div>
@@ -79,7 +82,8 @@
         <li v-for="cap in captions">{{ cap.text }}</li>
       </ul>
     </div>
-    <button id="run" onclick="runCode()"><i class="fa fa-cogs" aria-hidden="true"></i> Run</button>
+    <button id="run" onclick="runCode()"><i class="fa fa-cogs" aria-hidden="true"></i>
+      Run</button>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script type="text/javascript" src="harmonic_complexifier.js"></script>

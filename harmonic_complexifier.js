@@ -227,7 +227,12 @@ function inText() {
 function addToStdin() {
   previewText = inText()
   if (previewText != ''){
-    if (chords.notes.find( (el) => el.active == true) == null) {
+    if (chords.keys.find( (el) => el.active == true) == null) {
+      chords.error.push('Key missing: select a key before add a new element');
+      setTimeout(() => { chords.error.shift(); }, 3000)
+    }
+
+    else if (chords.notes.find( (el) => el.active == true) == null) {
       chords.error.push('Note missing: select a note before add a new element');
       setTimeout(() => { chords.error.shift(); }, 3000)
     }
@@ -291,17 +296,24 @@ function switchToButtons() {
   document.getElementById("btnSwitch").classList.add("activated");
 }
 
-function playKey(key, e) {
-
-}
-
 function runCode() {
 
 }
 
 document.onkeydown = function(e) {
-  if (keyboard.style.display == 'block' && !e.repeat && keys.indexOf(e.key) != -1)
+  if (keyboard.style.display == 'block' && !e.repeat && keys.indexOf(e.key) != -1){
     playNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
+
+    chords.Wkeys.forEach((key) => {
+      if (key.text == e.key)
+        key.clicked = !key.clicked;
+    });
+
+    chords.Bkeys.forEach((key) => {
+      if (key.text == e.key)
+        key.clicked = !key.clicked;
+    });
+  }
 }
 
 document.onkeyup = function(e) {
