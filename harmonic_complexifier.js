@@ -2,9 +2,18 @@ const BASE_FREQ = 261.63                              //frequency of C4
 keys            = "zsxdcvgbhnjmq2w3er5t6y7ui";
 
 const keySel = document.getElementById("keySel");
+/*
+const maj_temp = [true,false,false,false,true,false,false,true,false,false,false,true]
+const min_temp = [true,false,false,true,false,false,false,true,false,false,true,false]
+const dom_temp = [true,false,false,false,true,false,false,true,false,false,true,false]
+const m7b5_temp = [true,false,false,true,false,false,true,false,false,false,true,false]
+*/
 
 var audio = new AudioContext()
 var gains = {}
+var keyIndex = 0
+var chord_progOUT1
+var chord_progOUT2
 
 function playNote(freq){
   var osc1 = audio.createOscillator()
@@ -116,31 +125,26 @@ var chords = new Vue({
     chords:     [
                   {text:'M7',   active: false},
                   {text:'m7',   active: false},
-                  {text:'7',    active: false},
-                  {text:'mM7',  active: false},
-                  {text:'m7b5', active: false},
-                  {text:'M7#5', active: false},
+                  {text:'D7',   active: false},
                   {text:'dim7', active: false},
-                  {text:'7#5',  active: false},
-                  {text:'7b5',  active: false},
-                  {text:'6#5',  active: false}
                 ],
 
     durations:  [
-                  {text:'1',    active: false},
-                  {text:'1/2',  active: false},
-                  {text:'1/4',  active: false},
-                  {text:'1/8',  active: false},
-                  {text:'1/16', active: false},
-                  {text:'1/32', active: false},
-                  {text:'1/64', active: false}
+                  {text:'1',    value:1,    active: false},
+                  {text:'1/2',  value:1/2,  active: false},
+                  {text:'1/4',  value:1/4,  active: false},
+                  {text:'1/8',  value:1/8,  active: false},
+                  {text:'1/16', value:1/16, active: false},
+                  {text:'1/32', value:1/32, active: false},
                 ],
 
     preview:    { message: '' },
 
     error:      [],
 
-    stdin:      []
+    stdin:      [],
+
+    stdout:     []
 
   },
 
@@ -156,20 +160,15 @@ var chords = new Vue({
       chords.preview.message = inText();
     },
 
-    createNotes: function(el) {
-      chords.chords.forEach((i) => {
-        i.active = false;
-      });
+    newKey: function(el) {
+      keyIndex = chords.keys.findIndex(key => key.text === el.text)
 
-      chords.durations.forEach((i) => {
-        i.active = false;
-      });
+      resetInputs();
 
       chords.notes = [];
-      chords.preview.message = '';
       for (var i=0; i < chords.keys.length; i++) {
         chords.notes.push(
-          { text: chords.keys[(i + chords.keys.findIndex(key => key.text === el.text)) % chords.keys.length].text,
+          { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
             active: false
           }
         )
@@ -248,7 +247,29 @@ function addToStdin() {
     }
 
     else {
-      chords.stdin.push(previewText);
+      var note = ''
+      chords.notes.forEach((x) => {
+              if (x.active)
+                note = x.text
+            })
+
+      var chord = ''
+      chords.chords.forEach((x) => {
+              if (x.active)
+                chord = x.text
+            })
+
+      var duration = ''
+      chords.durations.forEach((x) => {
+              if (x.active)
+                duration = x.value
+            })
+
+      chords.stdin.push({
+        note: note,
+        chord: chord,
+        duration: duration
+      });
       console.log("Added");
     }
   }
@@ -262,15 +283,7 @@ function undoIn() {
   chords.stdin.pop();
 }
 
-function switchToKeyboard() {
-  buttons.style.display   = 'none';
-  keyboard.style.display  = 'block';
-  stdin.style.display     = 'block';
-  preview.style.display   = 'block';
-  console.log("Switched to keyboard input");
-  document.getElementById("keySwitch").classList.add("activated");
-  document.getElementById("btnSwitch").classList.remove("activated");
-
+function resetInputs(){
   chords.notes.forEach((i) => {
     i.active = false;
   });
@@ -286,6 +299,18 @@ function switchToKeyboard() {
   chords.preview.message = '';
 }
 
+function switchToKeyboard() {
+  buttons.style.display   = 'none';
+  keyboard.style.display  = 'block';
+  stdin.style.display     = 'block';
+  preview.style.display   = 'block';
+  console.log("Switched to keyboard input");
+  document.getElementById("keySwitch").classList.add("activated");
+  document.getElementById("btnSwitch").classList.remove("activated");
+
+  resetInputs();
+}
+
 function switchToButtons() {
   buttons.style.display   = 'block';
   keyboard.style.display  = 'none';
@@ -296,29 +321,115 @@ function switchToButtons() {
   document.getElementById("btnSwitch").classList.add("activated");
 }
 
-function runCode() {
+function pressedKey(e) {
+  chords.Wkeys.forEach((key) => {
+    if (key.text == e)
+      key.clicked = !key.clicked;
+  });
 
+  chords.Bkeys.forEach((key) => {
+    if (key.text == e)
+      key.clicked = !key.clicked;
+  });
 }
 
 document.onkeydown = function(e) {
   if (keyboard.style.display == 'block' && !e.repeat && keys.indexOf(e.key) != -1){
     playNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
 
-    chords.Wkeys.forEach((key) => {
-      if (key.text == e.key)
-        key.clicked = !key.clicked;
-    });
-
-    chords.Bkeys.forEach((key) => {
-      if (key.text == e.key)
-        key.clicked = !key.clicked;
-    });
+    pressedKey(e.key);
   }
 }
 
 document.onkeyup = function(e) {
-  if (keyboard.style.display == 'block' && keys.indexOf(e.key) != -1)
+  if (keyboard.style.display == 'block' && keys.indexOf(e.key) != -1){
     stopNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
+    pressedKey(e.key);
+  }
 }
 
+function chord_prog_type(input, note_labels){
+  var place = []
+
+  for(var k=0; k < input.length; k++){
+    var note = input[k].note
+    if (input[k].chord == 'M7'){
+      if (note_labels.indexOf(note) == 0){
+        console.log("The chord "+ note +"M7 is the tonic");
+        place[k] = 1
+      }
+
+      else if (note_labels.indexOf(note) == 5) {
+        console.log("The chord "+ note +"M7 is the subdominant");
+        place[k] = 4
+      }
+
+      else{ place[k] = -1 }
+    }
+
+    else if (input[k].chord == 'D7') {
+      if (note_labels.indexOf(note) == 7){
+        console.log("The chord "+ note +"7 is the dominant");
+        place[k] = 5
+      }
+      else{ place[k] = -1 }
+    }
+
+    /*else if (input[k].chord == '') {
+
+    }*/
+  }
+
+  return place
+}
+
+function chord_prog_1(input, note_labels, place){
+  var chord_progOUT = []
+  for(var k=0; k < input.length; k++){
+      if (place[k] == 5){
+        el1 = {note: note_labels[2], chord: 'm', duration: input[k].duration};
+        el2 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration};
+        chord_progOUT.push(el1);
+        chord_progOUT.push(el2);
+      }
+      else { chord_progOUT.push(input[k]); }
+  }
+
+  return chord_progOUT;
+}
+
+function chord_prog_2(input, note_labels, place){
+  var chord_progOUT = []
+  for(var k=0; k < input.length; k++){
+    if (place[k] == 1) {
+      el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration};
+      el2 = {note: note_labels[9], chord: 'm', duration: input.duration}
+      chord_progOUT.push(el1);
+      chord_progOUT.push(el2);
+    }
+    else {
+      chord_progOUT.push(input[k]);
+    }
+  }
+
+  return chord_progOUT;
+}
+
+function runCode() {
+  note_labels = []
+  chords.notes.forEach((key) => note_labels.push(key.text))
+  var complex_iter = document.getElementById("complexity").value
+  var ind = []
+
+  var place = chord_prog_type(chords.stdin, note_labels);
+
+  // Add the minor substitution before the dominant chord (II - V - I)
+  chord_progOUT1 = chord_prog_1(chords.stdin, note_labels, place)
+
+  // Tonic to minor parallel substitution (I- iv- V)
+  chord_progOUT2 = chord_prog_2(chord_progOUT1, note_labels, place)
+
+}
+
+switchToButtons()
 resume()

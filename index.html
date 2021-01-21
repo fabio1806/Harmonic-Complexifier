@@ -17,30 +17,27 @@
       <div id="keySel">
         <h2>Key</h2>
           <button v-for="key in keys"
-                    v-on:click="activate(key, keys); createNotes(key);"
+                    v-on:click="activate(key, keys); newKey(key);"
                     v-bind:class="{activated: key.active}">
                     {{ key.text }}</button>
+          <div class="durations">
+            <h2>Duration</h2>
+              <button v-for="time in durations"
+                      v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
+                      {{ time.text }}</button>
+          </div>
       </div>
+
       <div id="buttons" style="display: none">
         <h2>Notes</h2>
-        <div id="firstIn">
-          <button v-for="note in notes"
-                    v-on:click="activate(note, notes)"
-                    v-bind:class="{activated: note.active}">
-                    {{ note.text }}</button>
-        </div>
+        <button v-for="note in notes"
+                  v-on:click="activate(note, notes)"
+                  v-bind:class="{activated: note.active}">
+                  {{ note.text }}</button>
         <h2>Chords</h2>
-        <div id="secondIn">
-          <button v-for="chord in chords"
-                  v-on:click="activate(chord, chords)" v-bind:class="{activated: chord.active}">
-                  {{ chord.text }}</button>
-        </div>
-        <h2>Duration</h2>
-        <div id="thirdIn">
-          <button v-for="time in durations"
-                  v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
-                  {{ time.text }}</button>
-        </div>
+        <button v-for="chord in chords"
+                v-on:click="activate(chord, chords)" v-bind:class="{activated: chord.active}">
+                {{ chord.text }}</button>
       </div>
       <div id="keyboard" style="display: none">
         <div id="Wkeys">
@@ -65,9 +62,10 @@
         </div>
       </div>
       <div id="stdin">
-        <div class="input" v-for="text in stdin">{{ text }}</div>
-        <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
+        <div class="input" v-for="text in stdin">{{ text.note }}{{ text.chord }} (1/{{ 1/text.duration }})</div>
       </div>
+      
+      <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
       <div id="preview">
         <div>{{ preview.message }}</div>
         <i class="fa fa-plus-square" onclick="addToStdin();"></i>
@@ -82,8 +80,15 @@
         <li v-for="cap in captions">{{ cap.text }}</li>
       </ul>
     </div>
-    <button id="run" onclick="runCode()"><i class="fa fa-cogs" aria-hidden="true"></i>
+    <div id="run">
+      <h4>N° iterations</h4>
+      <button onclick="runCode()"><i class="fa fa-cogs" aria-hidden="true"></i>
       Run</button>
+      <select id="complexity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script type="text/javascript" src="harmonic_complexifier.js"></script>
