@@ -167,14 +167,14 @@ var chords = new Vue({
 
       resetInputs();
 
-      chords.notes = [];
+      /*chords.notes = [];
       for (var i=0; i < chords.keys.length; i++) {
         chords.notes.push(
           { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
             active: false
           }
         )
-      }
+      }*/
     },
 
     playKey: function(el) {
@@ -467,6 +467,7 @@ function runCode() {
   // Tonic to minor parallel substitution (I- iv- V)
   chord_progOUT2 = chord_prog_2(chord_progOUT1, note_labels, place)
 
+  showResult();
 }
 
 function showResult() {
