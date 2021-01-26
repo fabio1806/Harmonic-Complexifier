@@ -84,7 +84,7 @@ div#keySel button, div#buttons button {
   width: 1025px;
   height: 300px;
   position: relative;
-  top: 15px;
+  top: 5px;
   left: 50%;
   transform: translate(-50%);
   margin-top: 20px;
@@ -112,7 +112,7 @@ div#keySel button, div#buttons button {
 .white {
   background-color: white;
   width: 65px;
-  height: 200px;
+  height: 190px;
   border: 1px solid black;
   z-index: -1;
   margin-left: 1px;
@@ -120,7 +120,7 @@ div#keySel button, div#buttons button {
 
 .white.key.active{
   background-color: lightgreen;
-  height: 198px;
+  height: 188px;
 }
 
 .black {
@@ -146,7 +146,7 @@ div#keySel button, div#buttons button {
   width: 50px;
   height: 50px;
   position: relative;
-  top: 130px;
+  top: 125px;
   line-height: 50px;
 }
 
@@ -173,7 +173,7 @@ div#keySel button, div#buttons button {
 }
 
 #preview {
-  display: none;
+  display: block;
   border-radius: 10px;
   width: 200px;
   height: 48px;
@@ -181,7 +181,7 @@ div#keySel button, div#buttons button {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid black;
   position: absolute;
-  right: 0;
+  right: -10px;
   bottom: 240px;
   transform: translate(0, -50%);
   padding-left: 15px;
@@ -210,7 +210,7 @@ div#keySel button, div#buttons button {
 }
 
 #stdin {
-  display: none;
+  display: block;
   color: whitesmoke;
   position: absolute;
   bottom: 25px;
@@ -244,20 +244,36 @@ div#keySel button, div#buttons button {
   top: 170px;
 }
 
+dialog h2{
+  margin-top: 10px;
+}
+
+#result {
+  border-radius: 5px;
+  width: 50%;
+  border: 3px solid #004760;
+}
+
+#stdout {
+  padding: 10px;
+}
+
+#close {
+  position: relative;
+  left: 100%;
+  transform: translate(-100%);
+}
+
 #run {
   position: absolute;
   bottom: 25px;
-  right: 10%;
-}
-
-#run h4 {
-  margin: 0;
-  margin-bottom: 10px;
+  right: 5%;
 }
 
 #run button {
   background-color: #355858;
   width: 60px;
+  height: 30px;
   border-radius: 5px;
 }
 
@@ -267,6 +283,6 @@ div#keySel button, div#buttons button {
   width: 40px;
   padding: 3px;
   position: relative;
-  bottom: 30px;
-  left: 25px;
+  bottom: 44px;
+  right: 44px;
 }

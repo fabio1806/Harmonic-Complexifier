@@ -2,12 +2,12 @@ const BASE_FREQ = 261.63                              //frequency of C4
 keys            = "zsxdcvgbhnjmq2w3er5t6y7ui";
 
 const keySel = document.getElementById("keySel");
-/*
+
 const maj_temp = [true,false,false,false,true,false,false,true,false,false,false,true]
 const min_temp = [true,false,false,true,false,false,false,true,false,false,true,false]
 const dom_temp = [true,false,false,false,true,false,false,true,false,false,true,false]
 const m7b5_temp = [true,false,false,true,false,false,true,false,false,false,true,false]
-*/
+
 
 var audio = new AudioContext()
 var gains = {}
@@ -144,7 +144,9 @@ var chords = new Vue({
 
     stdin:      [],
 
-    stdout:     []
+    chord_progOUT1: [],
+
+    chord_progOUT2: []
 
   },
 
@@ -161,7 +163,7 @@ var chords = new Vue({
     },
 
     newKey: function(el) {
-      keyIndex = chords.keys.findIndex(key => key.text === el.text)
+      keyIndex = chords.keys.findIndex(key => key.active == el.text)
 
       resetInputs();
 
@@ -185,6 +187,7 @@ var chords = new Vue({
 
     activeKey: function(el) {
       el.clicked = !el.clicked;
+      chords.preview.message = inText();
     }
   }
 })
@@ -193,34 +196,72 @@ var captions = new Vue({
   el: '#caption',
   data: {
     captions: [
-                {text:  'M = major chord'},
-                {text:  'm = minor chord'}
+                {text:  'M7 = major 7th chord'},
+                {text:  'm7 = minor 7th chord'},
+                {text:  'D7 = dominant 7th chord'},
+                {text:  'dim7 = diminished 7th chord'}
               ]
   }
 })
 
 function inText() {
   text = '';
+  if (buttons.style.display == 'block'){
+    chords.notes.forEach((note) => {
+      if (note.active){
+        text = text + note.text
+      }
+    });
 
-  chords.notes.forEach((note) => {
-    if (note.active){
-      text = text + note.text
+    chords.chords.forEach((chord) => {
+      if (chord.active){
+        text = text + chord.text
+      }
+    });
+
+    chords.durations.forEach((time) => {
+      if (time.active){
+        text = text + ' (' + time.text + ')';
+      }
+    });
+
+    return text;
+  }
+
+  if (keyboard.style.display == 'block'){
+    keyIndex = chords.keys.findIndex(key => key.active == true);
+    booleanArr = [chords.Wkeys[0], chords.Bkeys[0], chords.Wkeys[1], chords.Bkeys[1],
+                  chords.Wkeys[2], chords.Wkeys[3], chords.Bkeys[3], chords.Wkeys[4],
+                  chords.Bkeys[4], chords.Wkeys[5], chords.Bkeys[5], chords.Wkeys[6],
+                  chords.Wkeys[7], chords.Bkeys[7], chords.Wkeys[8], chords.Bkeys[8],
+                  chords.Wkeys[9], chords.Wkeys[10], chords.Bkeys[10], chords.Wkeys[11],
+                  chords.Bkeys[11], chords.Wkeys[12], chords.Bkeys[12], chords.Wkeys[13],
+                  chords.Wkeys[14]];
+    console.log(booleanArr);
+    var arr = []
+    for (i=0; i < 11; i++){
+      arr[i] = booleanArr[(keyIndex +i) % 11]
+      arr[i] = arr[i].clicked
     }
-  });
+    console.log(arr)
 
-  chords.chords.forEach((chord) => {
-    if (chord.active){
-      text = text + chord.text
-    }
-  });
+    if (arr == maj_temp)
+      text = booleanArr[keyIndex].note + 'M7';
 
-  chords.durations.forEach((time) => {
-    if (time.active){
-      text = text + ' (' + time.text + ')';
-    }
-  });
+    if (arr == min_temp)
+      text = booleanArr[keyIndex].note + 'm7';
 
-  return text;
+    if (arr == dom_temp)
+      text = booleanArr[keyIndex].note + 'D7';
+
+    chords.durations.forEach((time) => {
+      if (time.active){
+        text = text + ' (' + time.text + ')';
+      }
+    });
+
+    return text;
+  }
 }
 
 function addToStdin() {
@@ -302,8 +343,6 @@ function resetInputs(){
 function switchToKeyboard() {
   buttons.style.display   = 'none';
   keyboard.style.display  = 'block';
-  stdin.style.display     = 'block';
-  preview.style.display   = 'block';
   console.log("Switched to keyboard input");
   document.getElementById("keySwitch").classList.add("activated");
   document.getElementById("btnSwitch").classList.remove("activated");
@@ -314,8 +353,6 @@ function switchToKeyboard() {
 function switchToButtons() {
   buttons.style.display   = 'block';
   keyboard.style.display  = 'none';
-  stdin.style.display     = 'block';
-  preview.style.display   = 'block';
   console.log("Switched to buttons input");
   document.getElementById("keySwitch").classList.remove("activated");
   document.getElementById("btnSwitch").classList.add("activated");
@@ -331,6 +368,8 @@ function pressedKey(e) {
     if (key.text == e)
       key.clicked = !key.clicked;
   });
+
+  chords.preview.message = inText();
 }
 
 document.onkeydown = function(e) {
@@ -387,8 +426,8 @@ function chord_prog_1(input, note_labels, place){
   var chord_progOUT = []
   for(var k=0; k < input.length; k++){
       if (place[k] == 5){
-        el1 = {note: note_labels[2], chord: 'm', duration: input[k].duration};
-        el2 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration};
+        el1 = {note: note_labels[2], chord: 'm7', duration: input[k].duration/2};
+        el2 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
         chord_progOUT.push(el1);
         chord_progOUT.push(el2);
       }
@@ -402,8 +441,8 @@ function chord_prog_2(input, note_labels, place){
   var chord_progOUT = []
   for(var k=0; k < input.length; k++){
     if (place[k] == 1) {
-      el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration};
-      el2 = {note: note_labels[9], chord: 'm', duration: input.duration}
+      el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
+      el2 = {note: note_labels[9], chord: 'm7', duration: input.duration/2}
       chord_progOUT.push(el1);
       chord_progOUT.push(el2);
     }
@@ -418,7 +457,6 @@ function chord_prog_2(input, note_labels, place){
 function runCode() {
   note_labels = []
   chords.notes.forEach((key) => note_labels.push(key.text))
-  var complex_iter = document.getElementById("complexity").value
   var ind = []
 
   var place = chord_prog_type(chords.stdin, note_labels);
@@ -429,6 +467,49 @@ function runCode() {
   // Tonic to minor parallel substitution (I- iv- V)
   chord_progOUT2 = chord_prog_2(chord_progOUT1, note_labels, place)
 
+}
+
+function showResult() {
+  var int = document.getElementById("complexity").value;
+  if(int == 1) {
+    if(chord_progOUT1 != null){
+      stdout = document.getElementById("stdout");
+      if (stdout.firstChild != null)
+        stdout.removeChild(stdout.firstChild);
+
+      content = document.createElement("div");
+      for(k=0; k < chord_progOUT1.length; k++){
+        content.innerText += chord_progOUT1[k].note + chord_progOUT1[k].chord +
+          "(1/" + (1/chord_progOUT1[k].duration) + ") "
+      }
+      stdout.appendChild(content);
+
+      result = document.getElementById("result");
+      result.showModal();
+    }
+  }
+  if(int == 2) {
+    if(chord_progOUT2 != null){
+      stdout = document.getElementById("stdout");
+      if (stdout.firstChild != null)
+        stdout.removeChild(stdout.firstChild);
+
+      content = document.createElement("div");
+      for(k=0; k < chord_progOUT1.length; k++){
+        content.innerText += chord_progOUT1[k].note + chord_progOUT1[k].chord +
+          "(1/" + (1/chord_progOUT1[k].duration) + ") "
+      }
+      stdout.appendChild(content);
+
+      result = document.getElementById("result");
+      result.showModal();
+    }
+  }
+}
+
+function closeResult() {
+  result = document.getElementById("result");
+  result.close();
 }
 
 switchToButtons()

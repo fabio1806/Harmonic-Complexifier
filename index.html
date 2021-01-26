@@ -64,7 +64,7 @@
       <div id="stdin">
         <div class="input" v-for="text in stdin">{{ text.note }}{{ text.chord }} (1/{{ 1/text.duration }})</div>
       </div>
-      
+
       <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
       <div id="preview">
         <div>{{ preview.message }}</div>
@@ -73,6 +73,11 @@
       <div id="error">
         <div v-for="err in error">{{ err }}</div>
       </div>
+      <dialog id="result">
+        <h2>Result</h2>
+        <div id="stdout"></div>
+        <button id="close" onclick="closeResult()">Close</button>
+      </dialog>
     </div>
     <div id="caption">
       <h4>Captions</h4>
@@ -82,8 +87,9 @@
     </div>
     <div id="run">
       <h4>N° iterations</h4>
-      <button onclick="runCode()"><i class="fa fa-cogs" aria-hidden="true"></i>
-      Run</button>
+      <button onclick="runCode()"><i class="fa fa-arrow-circle-right"></i>
+        Run</button>
+      <button onclick="showResult()">Result</button>
       <select id="complexity">
         <option value="1">1</option>
         <option value="2">2</option>
