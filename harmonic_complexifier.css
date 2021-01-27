@@ -70,8 +70,7 @@ div#inputSel button {
 }
 
 div#keySel button, div#buttons button {
-  width: 45px;
-  height: 30px;
+  width: 35px;
   padding: 0px;
 }
 
@@ -80,11 +79,14 @@ div#keySel button, div#buttons button {
   border: 1px solid green;
 }
 
+.durations {
+  font-size: 25px;
+    height: 32px;
+}
+
 #keyboard {
   width: 1025px;
-  height: 300px;
   position: relative;
-  top: 5px;
   left: 50%;
   transform: translate(-50%);
   margin-top: 20px;
@@ -175,17 +177,16 @@ div#keySel button, div#buttons button {
 #preview {
   display: block;
   border-radius: 10px;
-  width: 200px;
+  width: 130px;
   height: 48px;
   line-height: 48px;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid black;
   position: absolute;
-  right: -10px;
-  bottom: 240px;
-  transform: translate(0, -50%);
-  padding-left: 15px;
-  font-size: 24px;
+  right: -165px;
+  bottom: 155px;
+  padding-left: 10px;
+  font-size: 20px;
 }
 
 .fa-plus-square {
@@ -205,8 +206,8 @@ div#keySel button, div#buttons button {
   color: red;
   font-size: 14px;
   position: absolute;
-  right: -155px;
-  bottom: 270px;
+  right: -175px;
+  bottom: 210px;
 }
 
 #stdin {
@@ -214,7 +215,7 @@ div#keySel button, div#buttons button {
   color: whitesmoke;
   position: absolute;
   bottom: 25px;
-  height: 220px;
+  height: 180px;
   width: 100%;
   background: rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.8);
@@ -237,11 +238,15 @@ div#keySel button, div#buttons button {
 }
 
 #caption {
-  padding: 5px 10px;
+  padding: 0px 10px;
   border: 1px solid blue;
   position: absolute;
   left: 50px;
   top: 170px;
+}
+
+#caption ul {
+  margin-inline-start: -20px;
 }
 
 dialog h2{
@@ -267,7 +272,7 @@ dialog h2{
 #run {
   position: absolute;
   bottom: 25px;
-  right: 5%;
+  left: 77%;
 }
 
 #run button {

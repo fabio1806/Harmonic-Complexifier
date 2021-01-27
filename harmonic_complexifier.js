@@ -123,19 +123,19 @@ var chords = new Vue({
                 ],
 
     chords:     [
-                  {text:'M7',   active: false},
+                  {text:'Δ',   active: false},
                   {text:'m7',   active: false},
-                  {text:'D7',   active: false},
+                  {text:'7',   active: false},
                   {text:'dim7', active: false},
                 ],
 
     durations:  [
-                  {text:'1',    value:1,    active: false},
-                  {text:'1/2',  value:1/2,  active: false},
-                  {text:'1/4',  value:1/4,  active: false},
-                  {text:'1/8',  value:1/8,  active: false},
-                  {text:'1/16', value:1/16, active: false},
-                  {text:'1/32', value:1/32, active: false},
+                  {text:'𝅝',  value:1,    active: false},
+                  {text:'𝅗𝅥',  value:1/2,  active: false},
+                  {text:'♩',  value:1/4,  active: false},
+                  {text:'𝅘𝅥𝅮',  value:1/8,  active: false},
+                  {text:'𝅘𝅥𝅯', value:1/16, active: false},
+                  {text:'𝅘𝅥𝅰', value:1/32, active: false},
                 ],
 
     preview:    { message: '' },
@@ -163,18 +163,18 @@ var chords = new Vue({
     },
 
     newKey: function(el) {
-      keyIndex = chords.keys.findIndex(key => key.active == el.text)
+      keyIndex = chords.keys.findIndex(key => key.text == el.text)
 
       resetInputs();
 
-      /*chords.notes = [];
+      chords.notes = [];
       for (var i=0; i < chords.keys.length; i++) {
         chords.notes.push(
           { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
             active: false
           }
         )
-      }*/
+      }
     },
 
     playKey: function(el) {
@@ -196,10 +196,10 @@ var captions = new Vue({
   el: '#caption',
   data: {
     captions: [
-                {text:  'M7 = major 7th chord'},
-                {text:  'm7 = minor 7th chord'},
-                {text:  'D7 = dominant 7th chord'},
-                {text:  'dim7 = diminished 7th chord'}
+                {text:  'Δ = major 7th'},
+                {text:  'm7 = minor 7th'},
+                {text:  '7 = dominant 7th'},
+                {text:  'dim7 = diminished 7th'}
               ]
   }
 })
@@ -246,13 +246,13 @@ function inText() {
     console.log(arr)
 
     if (arr == maj_temp)
-      text = booleanArr[keyIndex].note + 'M7';
+      text = booleanArr[keyIndex].note + 'Δ';
 
     if (arr == min_temp)
       text = booleanArr[keyIndex].note + 'm7';
 
     if (arr == dom_temp)
-      text = booleanArr[keyIndex].note + 'D7';
+      text = booleanArr[keyIndex].note + '7';
 
     chords.durations.forEach((time) => {
       if (time.active){
@@ -392,21 +392,21 @@ function chord_prog_type(input, note_labels){
 
   for(var k=0; k < input.length; k++){
     var note = input[k].note
-    if (input[k].chord == 'M7'){
+    if (input[k].chord == 'Δ'){
       if (note_labels.indexOf(note) == 0){
-        console.log("The chord "+ note +"M7 is the tonic");
+        console.log("The chord "+ note +"Δ is the tonic");
         place[k] = 1
       }
 
       else if (note_labels.indexOf(note) == 5) {
-        console.log("The chord "+ note +"M7 is the subdominant");
+        console.log("The chord "+ note +"Δ is the subdominant");
         place[k] = 4
       }
 
       else{ place[k] = -1 }
     }
 
-    else if (input[k].chord == 'D7') {
+    else if (input[k].chord == '7') {
       if (note_labels.indexOf(note) == 7){
         console.log("The chord "+ note +"7 is the dominant");
         place[k] = 5
@@ -473,7 +473,7 @@ function runCode() {
 function showResult() {
   var int = document.getElementById("complexity").value;
   if(int == 1) {
-    if(chord_progOUT1 != null){
+    if(chord_progOUT1 != null && chord_progOUT1.length != 0){
       stdout = document.getElementById("stdout");
       if (stdout.firstChild != null)
         stdout.removeChild(stdout.firstChild);
@@ -490,7 +490,7 @@ function showResult() {
     }
   }
   if(int == 2) {
-    if(chord_progOUT2 != null){
+    if(chord_progOUT2 != null && chord_progOUT2.length != 0){
       stdout = document.getElementById("stdout");
       if (stdout.firstChild != null)
         stdout.removeChild(stdout.firstChild);

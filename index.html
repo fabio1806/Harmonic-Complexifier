@@ -20,9 +20,9 @@
                     v-on:click="activate(key, keys); newKey(key);"
                     v-bind:class="{activated: key.active}">
                     {{ key.text }}</button>
-          <div class="durations">
+          <div >
             <h2>Duration</h2>
-              <button v-for="time in durations"
+              <button class="durations" v-for="time in durations"
                       v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
                       {{ time.text }}</button>
           </div>
