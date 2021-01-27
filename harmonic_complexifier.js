@@ -1,7 +1,7 @@
 const BASE_FREQ = 261.63                              //frequency of C4
 keys            = "zsxdcvgbhnjmq2w3er5t6y7ui";
 
-const keySel = document.getElementById("keySel");
+const keySel    = document.getElementById("keySel");
 
 const maj_temp = [true,false,false,false,true,false,false,true,false,false,false,true]
 const min_temp = [true,false,false,true,false,false,false,true,false,false,true,false]
@@ -163,17 +163,21 @@ var chords = new Vue({
     },
 
     newKey: function(el) {
-      keyIndex = chords.keys.findIndex(key => key.text == el.text)
+      if (document.getElementById("padlock").classList == "fa fa-unlock") {
+        keyIndex = chords.keys.findIndex(key => key.text == el.text)
 
-      resetInputs();
+        resetInputs();
 
-      chords.notes = [];
-      for (var i=0; i < chords.keys.length; i++) {
-        chords.notes.push(
-          { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
-            active: false
-          }
-        )
+        chords.notes = [];
+        for (var i=0; i < chords.keys.length; i++) {
+          chords.notes.push(
+            { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
+              active: false
+            }
+          )
+        }
+        chords.activate(el, chords.keys)
+        document.getElementById("padlock").click();
       }
     },
 
@@ -512,6 +516,12 @@ function closeResult() {
   result = document.getElementById("result");
   result.close();
 }
+
+
+document.getElementById("padlock").addEventListener('click', function(el) {
+    console.log(el);
+    el.target.classList.toggle("fa-unlock");
+    el.target.classList.toggle("fa-lock")})
 
 switchToButtons()
 resume()

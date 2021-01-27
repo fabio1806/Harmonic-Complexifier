@@ -16,16 +16,17 @@
       </div>
       <div id="keySel">
         <h2>Key</h2>
-          <button v-for="key in keys"
-                    v-on:click="activate(key, keys); newKey(key);"
-                    v-bind:class="{activated: key.active}">
-                    {{ key.text }}</button>
-          <div >
-            <h2>Duration</h2>
-              <button class="durations" v-for="time in durations"
-                      v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
-                      {{ time.text }}</button>
-          </div>
+        <i id="padlock" class="fa fa-unlock"></i>
+        <button v-for="key in keys"
+                  v-on:click="newKey(key);"
+                  v-bind:class="{activated: key.active}">
+                  {{ key.text }}</button>
+        <div>
+          <h2>Duration</h2>
+            <button class="durations" v-for="time in durations"
+                    v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
+                    {{ time.text }}</button>
+        </div>
       </div>
 
       <div id="buttons" style="display: none">

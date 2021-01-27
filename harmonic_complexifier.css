@@ -84,6 +84,14 @@ div#keySel button, div#buttons button {
     height: 32px;
 }
 
+.fa-lock, .fa-unlock {
+  cursor: pointer;
+  position: absolute;
+  top: 181px;
+  left: 85px;
+  z-index: +1;
+}
+
 #keyboard {
   width: 1025px;
   position: relative;
@@ -247,6 +255,10 @@ div#keySel button, div#buttons button {
 
 #caption ul {
   margin-inline-start: -20px;
+}
+
+dialog {
+  user-select: all;
 }
 
 dialog h2{
