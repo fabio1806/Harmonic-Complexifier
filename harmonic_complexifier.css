@@ -110,6 +110,7 @@ div#keySel button, div#buttons button {
   position: absolute;
   left: 53px;
   top: -3px;
+  z-index: 1;
 }
 
 .key {
@@ -124,7 +125,6 @@ div#keySel button, div#buttons button {
   width: 65px;
   height: 190px;
   border: 1px solid black;
-  z-index: -1;
   margin-left: 1px;
 }
 

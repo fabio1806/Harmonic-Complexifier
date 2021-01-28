@@ -233,6 +233,7 @@ function inText() {
   }
 
   if (keyboard.style.display == 'block'){
+    keyIndex = chords.keys.findIndex(key => key.active == true)
     arr = [chords.Wkeys[0].clicked, chords.Bkeys[0].clicked, chords.Wkeys[1].clicked, chords.Bkeys[1].clicked,
             chords.Wkeys[2].clicked, chords.Wkeys[3].clicked, chords.Bkeys[3].clicked, chords.Wkeys[4].clicked,
             chords.Bkeys[4].clicked, chords.Wkeys[5].clicked, chords.Bkeys[5].clicked, chords.Wkeys[6].clicked,
@@ -240,32 +241,32 @@ function inText() {
             chords.Wkeys[9].clicked, chords.Wkeys[10].clicked, chords.Bkeys[10].clicked, chords.Wkeys[11].clicked,
             chords.Bkeys[11].clicked, chords.Wkeys[12].clicked, chords.Bkeys[12].clicked, chords.Wkeys[13].clicked,
             chords.Wkeys[14].clicked];
-    
+
     /* C chords */
     if (JSON.stringify(arr) == JSON.stringify([true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
         JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false])){
-      document.getElementById("buttons").children[1].click();
+      document.getElementById("buttons").children[(12 - keyIndex +1)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'CΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false])){
-      document.getElementById("buttons").children[1].click();
+      document.getElementById("buttons").children[(12 - keyIndex +1)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Cm7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false])){
-      document.getElementById("buttons").children[1].click();
+      document.getElementById("buttons").children[(12 - keyIndex +1)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'C7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false])){
-      document.getElementById("buttons").children[1].click();
+      document.getElementById("buttons").children[(12 - keyIndex +1)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Cdim7'
     }
@@ -273,280 +274,280 @@ function inText() {
     /* C# chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true])){
-      document.getElementById("buttons").children[2].click();
+      document.getElementById("buttons").children[(12 - keyIndex +2)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'C#Δ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false])){
-      document.getElementById("buttons").children[2].click();
+      document.getElementById("buttons").children[(12 - keyIndex +2)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'C#m7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false])){
-      document.getElementById("buttons").children[2].click();
+      document.getElementById("buttons").children[(12 - keyIndex +2)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'C#7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false])){
-      document.getElementById("buttons").children[2].click();
+      document.getElementById("buttons").children[(12 - keyIndex +2)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'C#dim7'
     }
 
     /* D chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[3].click();
+      document.getElementById("buttons").children[(12 - keyIndex +3)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'DΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[3].click();
+      document.getElementById("buttons").children[(12 - keyIndex +3)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Dm7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[3].click();
+      document.getElementById("buttons").children[(12 - keyIndex +3)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'D7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false])){
-      document.getElementById("buttons").children[3].click();
+      document.getElementById("buttons").children[(12 - keyIndex +3)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Ddim7'
     }
 
     /* D# chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[4].click();
+      document.getElementById("buttons").children[(12 - keyIndex +4)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'D#Δ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[4].click();
+      document.getElementById("buttons").children[(12 - keyIndex +4)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'D#m7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[4].click();
+      document.getElementById("buttons").children[(12 - keyIndex +4)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'D#7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false]) ||
             JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true])){
-      document.getElementById("buttons").children[4].click();
+      document.getElementById("buttons").children[(12 - keyIndex +4)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'D#dim7'
     }
 
     /* E chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[5].click();
+      document.getElementById("buttons").children[(12 - keyIndex +5)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'EΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[5].click();
+      document.getElementById("buttons").children[(12 - keyIndex +5)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Em7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[5].click();
+      document.getElementById("buttons").children[(12 - keyIndex +5)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'E7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[5].click();
+      document.getElementById("buttons").children[(12 - keyIndex +5)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Edim7'
     }
 
     /* F chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[6].click();
+      document.getElementById("buttons").children[(12 - keyIndex +6)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'FΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[6].click();
+      document.getElementById("buttons").children[(12 - keyIndex +6)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Fm7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[6].click();
+      document.getElementById("buttons").children[(12 - keyIndex +6)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'F7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[6].click();
+      document.getElementById("buttons").children[(12 - keyIndex +6)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Fdim7'
     }
 
     /* F# chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[7].click();
+      document.getElementById("buttons").children[(12 - keyIndex +7)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'F#Δ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[7].click();
+      document.getElementById("buttons").children[(12 - keyIndex +7)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'F#m7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[7].click();
+      document.getElementById("buttons").children[(12 - keyIndex +7)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'F#7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[7].click();
+      document.getElementById("buttons").children[(12 - keyIndex +7)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'F#dim7'
     }
 
     /* G chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[8].click();
+      document.getElementById("buttons").children[(12 - keyIndex +8)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'GΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[8].click();
+      document.getElementById("buttons").children[(12 - keyIndex +8)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Gm7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[8].click();
+      document.getElementById("buttons").children[(12 - keyIndex +8)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'G7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[8].click();
+      document.getElementById("buttons").children[(12 - keyIndex +8)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Gdim7'
     }
 
     /* G# chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false])){
-      document.getElementById("buttons").children[9].click();
+      document.getElementById("buttons").children[(12 - keyIndex +9)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'G#Δ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[9].click();
+      document.getElementById("buttons").children[(12 - keyIndex +9)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'G#m7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[9].click();
+      document.getElementById("buttons").children[(12 - keyIndex +9)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'G#7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[9].click();
+      document.getElementById("buttons").children[(12 - keyIndex +9)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'G#dim7'
     }
 
     /* A chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false])){
-      document.getElementById("buttons").children[10].click();
+      document.getElementById("buttons").children[(12 - keyIndex +10)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'AΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false])){
-      document.getElementById("buttons").children[10].click();
+      document.getElementById("buttons").children[(12 - keyIndex +10)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Am7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false, false])){
-      document.getElementById("buttons").children[10].click();
+      document.getElementById("buttons").children[(12 - keyIndex +10)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'A7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false, false])){
-      document.getElementById("buttons").children[10].click();
+      document.getElementById("buttons").children[(12 - keyIndex +10)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Adim7'
     }
 
     /* A# chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false])){
-      document.getElementById("buttons").children[11].click();
+      document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'A#Δ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false])){
-      document.getElementById("buttons").children[11].click();
+      document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'A#m7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false])){
-      document.getElementById("buttons").children[11].click();
+      document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'A#7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false])){
-      document.getElementById("buttons").children[11].click();
+      document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'A#dim7'
     }
 
     /* B chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false])){
-      document.getElementById("buttons").children[12].click();
+      document.getElementById("buttons").children[(12 - keyIndex +12)%12].click();
       document.getElementById("buttons").children[14].click();
       text = 'BΔ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false])){
-      document.getElementById("buttons").children[12].click();
+      document.getElementById("buttons").children[(12 - keyIndex +12)%12].click();
       document.getElementById("buttons").children[15].click();
       text = 'Bm7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false])){
-      document.getElementById("buttons").children[12].click();
+      document.getElementById("buttons").children[(12 - keyIndex +12)%12].click();
       document.getElementById("buttons").children[16].click();
       text = 'B7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false])){
-      document.getElementById("buttons").children[12].click();
+      document.getElementById("buttons").children[(12 - keyIndex +12)%12].click();
       document.getElementById("buttons").children[17].click();
       text = 'Bdim7'
     }
@@ -740,7 +741,7 @@ function chord_prog_2(input, note_labels, place){
   for(var k=0; k < input.length; k++){
     if (place[k] == 1) {
       el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
-      el2 = {note: note_labels[9], chord: 'm7', duration: input.duration/2}
+      el2 = {note: note_labels[9], chord: 'm7', duration: input[k].duration/2}
       chord_progOUT.push(el1);
       chord_progOUT.push(el2);
     }
@@ -794,9 +795,9 @@ function showResult() {
         stdout.removeChild(stdout.firstChild);
 
       content = document.createElement("div");
-      for(k=0; k < chord_progOUT1.length; k++){
-        content.innerText += chord_progOUT1[k].note + chord_progOUT1[k].chord +
-          "(1/" + (1/chord_progOUT1[k].duration) + ") "
+      for(k=0; k < chord_progOUT2.length; k++){
+        content.innerText += chord_progOUT2[k].note + chord_progOUT2[k].chord +
+          "(1/" + (1/chord_progOUT2[k].duration) + ") "
       }
       stdout.appendChild(content);
 
