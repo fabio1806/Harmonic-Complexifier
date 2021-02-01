@@ -565,8 +565,13 @@ function inText() {
       }
     });
 
-    if (text != preview.message && chord != null)
+    /* for debug */
+    /* console.log(arr) */
+
+    if (chord != null)
       return text;
+    else
+      return preview.message
   }
 }
 
