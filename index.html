@@ -24,7 +24,8 @@
         <div>
           <h2>Duration</h2>
             <button class="durations" v-for="time in durations"
-                    v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}">
+                    v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}"
+                    v-bind:alt="time.value">
                     {{ time.text }}</button>
         </div>
       </div>
@@ -62,14 +63,11 @@
           </div>
         </div>
       </div>
-      <div id="stdin">
-        <div class="input" v-for="text in stdin">{{ text.note }}{{ text.chord }} (1/{{ 1/text.duration }})</div>
-      </div>
-
-      <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
-      <div id="preview">
-        <div>{{ preview.message }}</div>
-        <i class="fa fa-plus-square" onclick="addToStdin();"></i>
+      <div class="inputPanel">
+        <div id="stdin">
+          <div class="input" v-for="text in stdin">{{ text.note }}{{ text.chord }} (1/{{ 1/text.duration }})</div>
+        </div>
+        <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
       </div>
       <div id="error">
         <div v-for="err in error">{{ err }}</div>
@@ -86,18 +84,23 @@
         <li v-for="cap in captions">{{ cap.text }}</li>
       </ul>
     </div>
-    <div id="run">
-      <h4>N° iterations</h4>
-      <button onclick="runCode()"><i class="fa fa-arrow-circle-right"></i>
-        Run</button>
-      <button onclick="showResult()">Result</button>
-      <select id="complexity">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
+    <div id="inputOpt">
+      <div id="preview">
+        <div>{{ message }}</div>
+        <i class="fa fa-plus-square" onclick="addToStdin();"></i>
+      </div>
+      <div id="run">
+        <h4>N° iterations</h4>
+        <button onclick="runCode()"><i class="fa fa-arrow-circle-right"></i>
+          Run</button>
+        <button onclick="reset()">Reset</button>
+        <select id="complexity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script type="text/javascript" src="harmonic_complexifier.js"></script>
   </body>

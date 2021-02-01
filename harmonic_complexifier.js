@@ -139,8 +139,6 @@ var chords = new Vue({
                   {text:'𝅘𝅥𝅰', value:1/32, active: false},
                 ],
 
-    preview:    { message: '' },
-
     error:      [],
 
     stdin:      [],
@@ -160,7 +158,7 @@ var chords = new Vue({
 
       el.active = true;
 
-      chords.preview.message = inText();
+      preview.message = inText();
     },
 
     newKey: function(el) {
@@ -191,7 +189,7 @@ var chords = new Vue({
 
     activeKey: function(el) {
       el.clicked = !el.clicked;
-      chords.preview.message = inText();
+      preview.message = inText();
     }
   }
 })
@@ -206,6 +204,11 @@ var captions = new Vue({
                 {text:  'dim7 = diminished 7th'}
               ]
   }
+})
+
+var preview = new Vue({
+  el:   '#inputOpt',
+  data: {message:  ''}
 })
 
 function inText() {
@@ -562,7 +565,7 @@ function inText() {
       }
     });
 
-    if (chord != null)
+    if (text != preview.message && chord != null)
       return text;
   }
 }
@@ -640,7 +643,7 @@ function resetInputs(){
     i.active = false;
   });
 
-  chords.preview.message = inText();
+  preview.message = inText();
 }
 
 function switchToKeyboard() {
@@ -680,11 +683,15 @@ document.onkeydown = function(e) {
     playNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
 
     pressedKey(e.key);
-    chords.preview.message = inText();
+    preview.message = inText();
   }
 
   if (e.keyCode === 13){
     addToStdin();
+  }
+
+  if (e.keyCode === 8){
+    undoIn();
   }
 }
 
@@ -854,6 +861,17 @@ function showResult() {
       result.showModal();
     }
   }
+}
+
+function reset() {
+  w = Array.from(document.querySelector("#keyboard").children[0].children)
+  b = Array.from(document.querySelector("#keyboard").children[1].children)
+  a = w.concat(b);
+  a.forEach((e) => e.classList.remove("active"));
+  chords.keys.forEach((key) => key.active=false);
+  document.querySelector("#padlock").className="fa fa-unlock";
+  chords.stdin = [];
+  resetInputs();
 }
 
 function closeResult() {

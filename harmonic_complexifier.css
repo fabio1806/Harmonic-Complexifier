@@ -182,6 +182,21 @@ div#keySel button, div#buttons button {
   height: 60px;
 }
 
+.inputPanel {
+  position: absolute;
+  top: 580px;
+  bottom: 20px;
+  width: 100%;
+  transform: translate(-30px);
+}
+
+#inputOpt {
+  position: absolute;
+  top: 587px;
+  bottom: 20px;
+  left: 77%;
+}
+
 #preview {
   display: block;
   border-radius: 10px;
@@ -191,8 +206,6 @@ div#keySel button, div#buttons button {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid black;
   position: absolute;
-  right: -165px;
-  bottom: 155px;
   padding-left: 10px;
   font-size: 20px;
 }
@@ -222,22 +235,21 @@ div#keySel button, div#buttons button {
   display: block;
   color: whitesmoke;
   position: absolute;
-  bottom: 25px;
-  height: 180px;
   width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.8);
   font-size: 18px;
   overflow: overlay;
-  padding-right: 10px;
+  padding-right: 45px;
 }
 
 #undoBtn {
   background-color: #355858;
   border-radius: 5px;
   position: absolute;
-  bottom: 35px;
-  right: 1%;
+  bottom: 5px;
+  right: -28px;
 }
 
 .input {
@@ -247,7 +259,8 @@ div#keySel button, div#buttons button {
 
 #caption {
   padding: 0px 10px;
-  border: 1px solid blue;
+  border: 1px solid #355858;
+  border-radius: 10px;
   position: absolute;
   left: 50px;
   top: 170px;
@@ -283,8 +296,8 @@ dialog h2{
 
 #run {
   position: absolute;
-  bottom: 25px;
-  left: 77%;
+  top: 50px;
+  width: 180px;
 }
 
 #run button {
@@ -295,7 +308,7 @@ dialog h2{
 }
 
 #run select {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.25);
   border: none;
   width: 40px;
   padding: 3px;
