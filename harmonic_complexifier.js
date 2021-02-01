@@ -168,7 +168,7 @@ var chords = new Vue({
         chords.notes = [];
         for (var i=0; i < chords.keys.length; i++) {
           chords.notes.push(
-            { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
+            { text: chords.keys[(i*7 + keyIndex) % chords.keys.length].text,
               active: false
             }
           )
@@ -659,6 +659,7 @@ function switchToKeyboard() {
   document.getElementById("btnSwitch").classList.remove("activated");
 
   resetInputs();
+  resume()
 }
 
 function switchToButtons() {
@@ -891,4 +892,3 @@ document.getElementById("padlock").addEventListener('click', function(el) {
   })
 
 switchToButtons()
-resume()

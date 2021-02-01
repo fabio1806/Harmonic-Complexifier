@@ -188,6 +188,7 @@ div#keySel button, div#buttons button {
   bottom: 20px;
   width: 100%;
   transform: translate(-30px);
+  padding-top: 30px;
 }
 
 #inputOpt {
@@ -195,6 +196,7 @@ div#keySel button, div#buttons button {
   top: 587px;
   bottom: 20px;
   left: 77%;
+  padding-top: 125px;
 }
 
 #preview {
@@ -206,6 +208,7 @@ div#keySel button, div#buttons button {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid black;
   position: absolute;
+  top:0;
   padding-left: 10px;
   font-size: 20px;
 }
@@ -235,6 +238,7 @@ div#keySel button, div#buttons button {
   display: block;
   color: whitesmoke;
   position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -296,7 +300,7 @@ dialog h2{
 
 #run {
   position: absolute;
-  top: 50px;
+  bottom: 0;
   width: 180px;
 }
 
