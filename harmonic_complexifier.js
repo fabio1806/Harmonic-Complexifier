@@ -40,19 +40,19 @@ var chords = new Vue({
                 ],
 
     Bkeys:      [
-                  {text: 's', activeClass: 'black key', clicked: false, src: "./audio/C#4.wav"},
-                  {text: 'd', activeClass: 'black key', clicked: false, src: "./audio/D#4.wav"},
+                  {text: 's', activeClass: 'black key', clicked: false, src: "./audio/C%234.wav"},
+                  {text: 'd', activeClass: 'black key', clicked: false, src: "./audio/D%234.wav"},
                   {text: '',  activeClass: 'space',     clicked: false},
-                  {text: 'g', activeClass: 'black key', clicked: false, src: "./audio/F#4.wav"},
-                  {text: 'h', activeClass: 'black key', clicked: false, src: "./audio/G#4.wav"},
-                  {text: 'j', activeClass: 'black key', clicked: false, src: "./audio/A#4.wav"},
+                  {text: 'g', activeClass: 'black key', clicked: false, src: "./audio/F%234.wav"},
+                  {text: 'h', activeClass: 'black key', clicked: false, src: "./audio/G%234.wav"},
+                  {text: 'j', activeClass: 'black key', clicked: false, src: "./audio/A%234.wav"},
                   {text: '',  activeClass: 'space',     clicked: false},
-                  {text: '2', activeClass: 'black key', clicked: false, src: "./audio/C#5.wav"},
-                  {text: '3', activeClass: 'black key', clicked: false, src: "./audio/D#5.wav"},
+                  {text: '2', activeClass: 'black key', clicked: false, src: "./audio/C%235.wav"},
+                  {text: '3', activeClass: 'black key', clicked: false, src: "./audio/D%235.wav"},
                   {text: '',  activeClass: 'space',     clicked: false},
-                  {text: '5', activeClass: 'black key', clicked: false, src: "./audio/F#5.wav"},
-                  {text: '6', activeClass: 'black key', clicked: false, src: "./audio/G#5.wav"},
-                  {text: '7', activeClass: 'black key', clicked: false, src: "./audio/A#5.wav"},
+                  {text: '5', activeClass: 'black key', clicked: false, src: "./audio/F%235.wav"},
+                  {text: '6', activeClass: 'black key', clicked: false, src: "./audio/G%235.wav"},
+                  {text: '7', activeClass: 'black key', clicked: false, src: "./audio/A%235.wav"},
                 ],
 
     keys:       [
@@ -646,9 +646,9 @@ function pressedKey(e) {
 
 document.onkeydown = function(e) {
   if (keyboard.style.display == 'block' && !e.repeat && keys.indexOf(e.key) != -1){
-    var el = chords.Wkeys.find(key => key.text == e.text)
+    var el = chords.Wkeys.find(key => key.text == e.key)
     if (el == null)
-      el = chords.Bkeys.find(key => key.text == e.text)
+      el = chords.Bkeys.find(key => key.text == e.key)
     var audio = new Audio(el.src);
     audio.play();
 
