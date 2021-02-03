@@ -16,81 +16,43 @@ var chord_progOUT1
 var chord_progOUT2
 var chord_progOUT3
 
-function playNote(freq){
-  var osc1 = audio.createOscillator()
-  osc1.type = "triangle"
-  var osc2 = audio.createOscillator()
-  osc2.type = "triangle"
-  var g1 = audio.createGain()
-  var g2 = audio.createGain()
-  gains[freq] = g1
-  gains[4*freq] = g2
-  osc1.connect(g1)
-  osc2.connect(g2)
-  g1.connect(audio.destination)
-  g2.connect(audio.destination)
-  osc1.frequency.setValueAtTime(freq, audio.currentTime)
-  osc2.frequency.setValueAtTime(4*freq, audio.currentTime)
-  osc1.start()
-  osc2.start()
-  g1.gain.linearRampToValueAtTime(1, audio.currentTime)
-  g1.gain.linearRampToValueAtTime(0.8, audio.currentTime+0.2)
-  g2.gain.linearRampToValueAtTime(0.2, audio.currentTime)
-  g2.gain.linearRampToValueAtTime(0.15, audio.currentTime+0.2)
-}
-
-function stopNote(freq){
-  var g1 = gains[freq]
-  g1.gain.linearRampToValueAtTime(0.8, audio.currentTime)
-  g1.gain.linearRampToValueAtTime(0, audio.currentTime+0.2)
-  var g2 = gains[4*freq]
-  g2.gain.linearRampToValueAtTime(0.15, audio.currentTime)
-  g2.gain.linearRampToValueAtTime(0, audio.currentTime+0.2)
-}
-
-function resume() {
-  audio.resume().then(() => {
-    console.log('Playback resumed successfully')
-  })
-}
-
 var chords = new Vue({
   el: '#root',
 
   data: {
 
     Wkeys:      [
-                  {text: 'z', clicked: false},
-                  {text: 'x', clicked: false},
-                  {text: 'c', clicked: false},
-                  {text: 'v', clicked: false},
-                  {text: 'b', clicked: false},
-                  {text: 'n', clicked: false},
-                  {text: 'm', clicked: false},
-                  {text: 'q', clicked: false},
-                  {text: 'w', clicked: false},
-                  {text: 'e', clicked: false},
-                  {text: 'r', clicked: false},
-                  {text: 't', clicked: false},
-                  {text: 'y', clicked: false},
-                  {text: 'u', clicked: false},
-                  {text: 'i', clicked: false},
+                  {text: 'z', clicked: false, src: "./audio/C4.wav"},
+                  {text: 'x', clicked: false, src: "./audio/D4.wav"},
+                  {text: 'c', clicked: false, src: "./audio/E4.wav"},
+                  {text: 'v', clicked: false, src: "./audio/F4.wav"},
+                  {text: 'b', clicked: false, src: "./audio/G4.wav"},
+                  {text: 'n', clicked: false, src: "./audio/A4.wav"},
+                  {text: 'm', clicked: false, src: "./audio/B4.wav"},
+                  {text: 'q', clicked: false, src: "./audio/C5.wav"},
+                  {text: 'w', clicked: false, src: "./audio/D5.wav"},
+                  {text: 'e', clicked: false, src: "./audio/E5.wav"},
+                  {text: 'r', clicked: false, src: "./audio/F5.wav"},
+                  {text: 't', clicked: false, src: "./audio/G5.wav"},
+                  {text: 'y', clicked: false, src: "./audio/A5.wav"},
+                  {text: 'u', clicked: false, src: "./audio/B5.wav"},
+                  {text: 'i', clicked: false, src: "./audio/C6.wav"},
                 ],
 
     Bkeys:      [
-                  {text: 's', activeClass: 'black key', clicked: false},
-                  {text: 'd', activeClass: 'black key', clicked: false},
+                  {text: 's', activeClass: 'black key', clicked: false, src: "./audio/C#4.wav"},
+                  {text: 'd', activeClass: 'black key', clicked: false, src: "./audio/D#4.wav"},
                   {text: '',  activeClass: 'space',     clicked: false},
-                  {text: 'g', activeClass: 'black key', clicked: false},
-                  {text: 'h', activeClass: 'black key', clicked: false},
-                  {text: 'j', activeClass: 'black key', clicked: false},
+                  {text: 'g', activeClass: 'black key', clicked: false, src: "./audio/F#4.wav"},
+                  {text: 'h', activeClass: 'black key', clicked: false, src: "./audio/G#4.wav"},
+                  {text: 'j', activeClass: 'black key', clicked: false, src: "./audio/A#4.wav"},
                   {text: '',  activeClass: 'space',     clicked: false},
-                  {text: '2', activeClass: 'black key', clicked: false},
-                  {text: '3', activeClass: 'black key', clicked: false},
+                  {text: '2', activeClass: 'black key', clicked: false, src: "./audio/C#5.wav"},
+                  {text: '3', activeClass: 'black key', clicked: false, src: "./audio/D#5.wav"},
                   {text: '',  activeClass: 'space',     clicked: false},
-                  {text: '5', activeClass: 'black key', clicked: false},
-                  {text: '6', activeClass: 'black key', clicked: false},
-                  {text: '7', activeClass: 'black key', clicked: false},
+                  {text: '5', activeClass: 'black key', clicked: false, src: "./audio/F#5.wav"},
+                  {text: '6', activeClass: 'black key', clicked: false, src: "./audio/G#5.wav"},
+                  {text: '7', activeClass: 'black key', clicked: false, src: "./audio/A#5.wav"},
                 ],
 
     keys:       [
@@ -139,8 +101,6 @@ var chords = new Vue({
                   {text:'𝅘𝅥𝅰', value:1/32, active: false},
                 ],
 
-    error:      [],
-
     stdin:      [],
 
     chord_progOUT1: [],
@@ -181,9 +141,8 @@ var chords = new Vue({
 
     playKey: function(el) {
       if (document.getElementById("keyboard").style.display == 'block' && keys.indexOf(el.text) != -1 && !el.clicked){
-        freq = BASE_FREQ * Math.pow(2, keys.indexOf(el.text)/12);
-        playNote(freq);
-        setTimeout(stopNote(freq), 2000);
+        var audio = new Audio(el.src);
+        audio.play();
       }
     },
 
@@ -208,7 +167,9 @@ var captions = new Vue({
 
 var preview = new Vue({
   el:   '#inputOpt',
-  data: {message:  ''}
+  data: { message:  '',
+          error: []
+        }
 })
 
 function inText() {
@@ -579,23 +540,23 @@ function addToStdin() {
   previewText = inText()
   if (previewText != ''){
     if (chords.keys.find( (el) => el.active == true) == null) {
-      chords.error.push('Key missing: select a key before add a new element');
-      setTimeout(() => { chords.error.shift(); }, 3000)
+      preview.error.push('Key missing: select a key before add a new element');
+      setTimeout(() => { preview.error.shift(); }, 3000)
     }
 
     else if (chords.notes.find( (el) => el.active == true) == null) {
-      chords.error.push('Note missing: select a note before add a new element');
-      setTimeout(() => { chords.error.shift(); }, 3000)
+      preview.error.push('Note missing: select a note before add a new element');
+      setTimeout(() => { preview.error.shift(); }, 3000)
     }
 
     else if (chords.chords.find( (el) => el.active == true) == null ) {
-      chords.error.push('Chord missing: select a chord before add a new element');
-      setTimeout(() => { chords.error.shift(); }, 3000)
+      preview.error.push('Chord missing: select a chord before add a new element');
+      setTimeout(() => { preview.error.shift(); }, 3000)
     }
 
     else if (chords.durations.find( (el) => el.active == true) == null ) {
-      chords.error.push('Duration missing: select a duration before add a new element');
-      setTimeout(() => { chords.error.shift(); }, 3000)
+      preview.error.push('Duration missing: select a duration before add a new element');
+      setTimeout(() => { preview.error.shift(); }, 3000)
     }
 
     else {
@@ -626,8 +587,8 @@ function addToStdin() {
     }
   }
   else {
-    chords.error.push("Empty input")
-    setTimeout(() => { chords.error.shift(); }, 3000)
+    preview.error.push("Empty input")
+    setTimeout(() => { preview.error.shift(); }, 3000)
   }
 }
 
@@ -659,7 +620,6 @@ function switchToKeyboard() {
   document.getElementById("btnSwitch").classList.remove("activated");
 
   resetInputs();
-  resume()
 }
 
 function switchToButtons() {
@@ -686,7 +646,11 @@ function pressedKey(e) {
 
 document.onkeydown = function(e) {
   if (keyboard.style.display == 'block' && !e.repeat && keys.indexOf(e.key) != -1){
-    playNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
+    var el = chords.Wkeys.find(key => key.text == e.text)
+    if (el == null)
+      el = chords.Bkeys.find(key => key.text == e.text)
+    var audio = new Audio(el.src);
+    audio.play();
 
     pressedKey(e.key);
     preview.message = inText();
@@ -703,7 +667,6 @@ document.onkeydown = function(e) {
 
 document.onkeyup = function(e) {
   if (keyboard.style.display == 'block' && keys.indexOf(e.key) != -1){
-    stopNote( BASE_FREQ * Math.pow(2, keys.indexOf(e.key)/12))
     pressedKey(e.key);
   }
 }

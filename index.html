@@ -69,9 +69,6 @@
         </div>
         <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
       </div>
-      <div id="error">
-        <div v-for="err in error">{{ err }}</div>
-      </div>
       <dialog id="result">
         <h2>Result</h2>
         <div id="stdout"></div>
@@ -88,6 +85,9 @@
       <div id="preview">
         <div>{{ message }}</div>
         <i class="fa fa-plus-square" onclick="addToStdin();"></i>
+      </div>
+      <div id="error">
+        <div v-for="err in error">{{ err }}</div>
       </div>
       <div id="run">
         <h4>N° iterations</h4>
