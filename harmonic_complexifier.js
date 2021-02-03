@@ -128,7 +128,7 @@ var chords = new Vue({
         chords.notes = [];
         for (var i=0; i < chords.keys.length; i++) {
           chords.notes.push(
-            { text: chords.keys[(i*7 + keyIndex) % chords.keys.length].text,
+            { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
               active: false
             }
           )
@@ -520,19 +520,16 @@ function inText() {
       chord = 'Bdim7'
     }
 
+    if (chord == null)
+      chord = preview.message.split(' ')[0];
+
     chords.durations.forEach((time) => {
       if (time.active){
         text = chord + ' (' + time.text + ')';
       }
     });
 
-    /* for debug */
-    /* console.log(arr) */
-
-    if (chord != null)
-      return text;
-    else
-      return preview.message
+    return text
   }
 }
 
@@ -609,7 +606,7 @@ function resetInputs(){
     i.active = false;
   });
 
-  preview.message = inText();
+  preview.message = '';
 }
 
 function switchToKeyboard() {
