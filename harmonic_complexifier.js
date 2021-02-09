@@ -66,7 +66,7 @@ var chords = new Vue({
                   {text:'G',  active: false},
                   {text:'A♭', active: false},
                   {text:'A',  active: false},
-                  {text:'A#', active: false},
+                  {text:'B♭', active: false},
                   {text:'B',  active: false}
                 ],
 
@@ -81,7 +81,7 @@ var chords = new Vue({
                   {text:'G',  active: false},
                   {text:'A♭', active: false},
                   {text:'A',  active: false},
-                  {text:'A#', active: false},
+                  {text:'B♭', active: false},
                   {text:'B',  active: false}
                 ],
 
@@ -161,6 +161,7 @@ var captions = new Vue({
                 {text:  'm7 = minor 7th'},
                 {text:  '7 = dominant 7th'},
                 {text:  'dim7 = diminished 7th'}
+                /* Add iteration description */
               ]
   }
 })
@@ -470,29 +471,29 @@ function inText() {
       chord = 'Adim7'
     }
 
-    /* A# chords */
+    /* B♭ chords */
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false])){
       document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[14].click();
-      chord = 'A#Δ'
+      chord = 'B♭Δ'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, false])){
       document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[15].click();
-      chord = 'A#m7'
+      chord = 'B♭m7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, false])){
       document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[16].click();
-      chord = 'A#7'
+      chord = 'B♭7'
     }
 
     else if (JSON.stringify(arr) == JSON.stringify([false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, false, true, false, false, true, false, false, false, false, false])){
       document.getElementById("buttons").children[(12 - keyIndex +11)%12].click();
       document.getElementById("buttons").children[17].click();
-      chord = 'A#dim7'
+      chord = 'B♭dim7'
     }
 
     /* B chords */
@@ -756,6 +757,8 @@ function chord_prog_3(input, note_labels, place) {
   return chord_progOUT;
 }
 
+function chord_prog_4(input, note_labels, place){}
+
 function runCode() {
   note_labels = []
   chords.notes.forEach((key) => note_labels.push(key.text))
@@ -770,6 +773,8 @@ function runCode() {
   chord_progOUT2 = chord_prog_2(chord_progOUT1, note_labels, place)
 
   chord_progOUT3 = chord_prog_3(chords.stdin, note_labels, place)
+
+  chord_progOUT4 = chord_prog_4(chords.stdin, note_labels, place)
 
   showResult();
 }
@@ -820,6 +825,23 @@ function showResult() {
       for(k=0; k < chord_progOUT3.length; k++){
         content.innerText += chord_progOUT3[k].note + chord_progOUT3[k].chord +
           "(1/" + (1/chord_progOUT2[3].duration) + ") "
+      }
+      stdout.appendChild(content);
+
+      result = document.getElementById("result");
+      result.showModal();
+    }
+  }
+  if(int == 4) {
+    if(chord_progOUT4 != null && chord_progOUT4.length != 0){
+      stdout = document.getElementById("stdout");
+      if (stdout.firstChild != null)
+        stdout.removeChild(stdout.firstChild);
+
+      content = document.createElement("div");
+      for(k=0; k < chord_progOUT4.length; k++){
+        content.innerText += chord_progOUT4[k].note + chord_progOUT4[k].chord +
+          "(1/" + (1/chord_progOUT4[k].duration) + ") "
       }
       stdout.appendChild(content);
 
