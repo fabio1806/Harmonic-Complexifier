@@ -3,12 +3,6 @@ keys            = "zsxdcvgbhnjmq2w3er5t6y7ui";
 
 const keySel    = document.getElementById("keySel");
 
-const maj_temp = [true,false,false,false,true,false,false,true,false,false,false,true]
-const min_temp = [true,false,false,true,false,false,false,true,false,false,true,false]
-const dom_temp = [true,false,false,false,true,false,false,true,false,false,true,false]
-const m7b5_temp = [true,false,false,true,false,false,true,false,false,false,true,false]
-
-
 var audio = new AudioContext()
 var gains = {}
 var keyIndex = 0
@@ -71,34 +65,34 @@ var chords = new Vue({
                 ],
 
     notes:       [
-                  {text:'C',  active: false},
-                  {text:'D♭', active: false},
-                  {text:'D',  active: false},
-                  {text:'E♭', active: false},
-                  {text:'E',  active: false},
-                  {text:'F',  active: false},
-                  {text:'F#', active: false},
-                  {text:'G',  active: false},
-                  {text:'A♭', active: false},
-                  {text:'A',  active: false},
-                  {text:'B♭', active: false},
-                  {text:'B',  active: false}
+                  {text:'C',  active: false,  show: true},
+                  {text:'D♭', active: false,  show: false},
+                  {text:'D',  active: false,  show: true},
+                  {text:'E♭', active: false,  show: false},
+                  {text:'E',  active: false,  show: true},
+                  {text:'F',  active: false,  show: true},
+                  {text:'F#', active: false,  show: false},
+                  {text:'G',  active: false,  show: true},
+                  {text:'A♭', active: false,  show: false},
+                  {text:'A',  active: false,  show: true},
+                  {text:'B♭', active: false,  show: false},
+                  {text:'B',  active: false,  show: true}
                 ],
 
     chords:     [
-                  {text:'Δ',   active: false},
+                  {text:'Δ',    active: false},
                   {text:'m7',   active: false},
-                  {text:'7',   active: false},
+                  {text:'7',    active: false},
                   {text:'dim7', active: false},
                 ],
 
     durations:  [
-                  {text:'𝅝',  value:1,    active: false},
-                  {text:'𝅗𝅥',  value:1/2,  active: false},
-                  {text:'♩',  value:1/4,  active: false},
-                  {text:'𝅘𝅥𝅮',  value:1/8,  active: false},
-                  {text:'𝅘𝅥𝅯', value:1/16, active: false},
-                  {text:'𝅘𝅥𝅰', value:1/32, active: false},
+                  {text:'𝅝',  value:1,    active: false, class: "1"   },
+                  {text:'𝅗𝅥',  value:1/2,  active: false, class: "1/2" },
+                  {text:'♩',  value:1/4,  active: false, class: "1/4" },
+                  {text:'𝅘𝅥𝅮',  value:1/8,  active: false, class: "1/8" },
+                  {text:'𝅘𝅥𝅯', value:1/16,  active: false, class: "1/16"},
+                  {text:'𝅘𝅥𝅰', value:1/32,  active: false, class: "1/32"},
                 ],
 
     stdin:      [],
@@ -704,7 +698,8 @@ function chord_prog_type(input, note_labels){
   return place
 }
 
-function chord_prog_1(input, note_labels, place){
+function chord_prog_1(input, note_labels){
+  var place = chord_prog_type(input, note_labels);
   var chord_progOUT = []
   for(var k=0; k < input.length; k++){
       if (place[k] == 5){
@@ -719,7 +714,8 @@ function chord_prog_1(input, note_labels, place){
   return chord_progOUT;
 }
 
-function chord_prog_2(input, note_labels, place){
+function chord_prog_2(input, note_labels){
+  var place = chord_prog_type(input, note_labels);
   var chord_progOUT = []
   for(var k=0; k < input.length; k++){
     if (place[k] == 1) {
@@ -736,45 +732,57 @@ function chord_prog_2(input, note_labels, place){
   return chord_progOUT;
 }
 
-function chord_prog_3(input, note_labels, place) {
+function chord_prog_3(input, note_labels) {
+  var place = chord_prog_type(input, note_labels);
   var chord_progOUT = []
   for(var k=0; k < input.length; k++){
       if (place[k] == 5){
+        console.log(input[k]);
         el1 = {note: note_labels[2], chord: '7', duration: input[k].duration/2};
         el2 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
         chord_progOUT.push(el1);
         chord_progOUT.push(el2);
       }
       else if (place[k] == 1) {
+        console.log(input[k]);
         el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
         el2 = {note: note_labels[9], chord: 'm7', duration: input[k].duration/2}
         chord_progOUT.push(el1);
         chord_progOUT.push(el2);
       }
-      else { chord_progOUT.push(input[k]); }
+      else {console.log(input[k], place[k]); chord_progOUT.push(input[k]); }
   }
 
   return chord_progOUT;
 }
 
-function chord_prog_4(input, note_labels, place){}
+function chord_prog_4(input, note_labels){
+  var place = chord_prog_type(input, note_labels);
+  var chord_progOUT = []
+
+  for(var k=0; k < input.length; k++) {
+    if (place[k] == 5)
+      chord_progOUT.push({note: note_labels[1], chord: '7', duration: input[k].duration});
+    else { chord_progOUT.push(input[k]); }
+  }
+
+  return chord_progOUT;
+}
 
 function runCode() {
   note_labels = []
   chords.notes.forEach((key) => note_labels.push(key.text))
   var ind = []
 
-  var place = chord_prog_type(chords.stdin, note_labels);
-
   // Add the minor substitution before the dominant chord (II - V - I)
-  chord_progOUT1 = chord_prog_1(chords.stdin, note_labels, place)
+  chord_progOUT1 = chord_prog_1(chords.stdin, note_labels)
 
   // Tonic to minor parallel substitution (I- iv- V)
-  chord_progOUT2 = chord_prog_2(chord_progOUT1, note_labels, place)
+  chord_progOUT2 = chord_prog_2(chord_progOUT1, note_labels)
 
-  chord_progOUT3 = chord_prog_3(chords.stdin, note_labels, place)
+  chord_progOUT3 = chord_prog_3(chords.stdin, note_labels)
 
-  chord_progOUT4 = chord_prog_4(chords.stdin, note_labels, place)
+  chord_progOUT4 = chord_prog_4(chord_progOUT3, note_labels)
 
   showResult();
 }
@@ -824,7 +832,7 @@ function showResult() {
       content = document.createElement("div");
       for(k=0; k < chord_progOUT3.length; k++){
         content.innerText += chord_progOUT3[k].note + chord_progOUT3[k].chord +
-          "(1/" + (1/chord_progOUT2[3].duration) + ") "
+          "(1/" + (1/chord_progOUT3[k].duration) + ") "
       }
       stdout.appendChild(content);
 
@@ -858,6 +866,7 @@ function reset() {
   a.forEach((e) => e.classList.remove("active"));
   chords.keys.forEach((key) => key.active=false);
   document.querySelector("#padlock").className="fa fa-unlock";
+  document.querySelector("#complexity").value = 1
   chords.stdin = [];
   resetInputs();
 }

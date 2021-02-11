@@ -25,7 +25,7 @@
           <h2>Duration</h2>
             <button class="durations" v-for="time in durations"
                     v-on:click="activate(time, durations)" v-bind:class="{activated: time.active}"
-                    v-bind:alt="time.value">
+                    v-bind:title="time.class">
                     {{ time.text }}</button>
         </div>
       </div>
