@@ -65,18 +65,18 @@ var chords = new Vue({
                 ],
 
     notes:       [
-                  {text:'C',  active: false,  show: true},
-                  {text:'D♭', active: false,  show: false},
-                  {text:'D',  active: false,  show: true},
-                  {text:'E♭', active: false,  show: false},
-                  {text:'E',  active: false,  show: true},
-                  {text:'F',  active: false,  show: true},
-                  {text:'F#', active: false,  show: false},
-                  {text:'G',  active: false,  show: true},
-                  {text:'A♭', active: false,  show: false},
-                  {text:'A',  active: false,  show: true},
-                  {text:'B♭', active: false,  show: false},
-                  {text:'B',  active: false,  show: true}
+                  {text:'C',  active: false,  hide: false},
+                  {text:'D♭', active: false,  hide: true},
+                  {text:'D',  active: false,  hide: false},
+                  {text:'E♭', active: false,  hide: true},
+                  {text:'E',  active: false,  hide: false},
+                  {text:'F',  active: false,  hide: false},
+                  {text:'F#', active: false,  hide: true},
+                  {text:'G',  active: false,  hide: false},
+                  {text:'A♭', active: false,  hide: true},
+                  {text:'A',  active: false,  hide: false},
+                  {text:'B♭', active: false,  hide: true},
+                  {text:'B',  active: false,  hide: false}
                 ],
 
     chords:     [
@@ -123,9 +123,14 @@ var chords = new Vue({
         for (var i=0; i < chords.keys.length; i++) {
           chords.notes.push(
             { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
-              active: false
+              active: false,
+              hide: true
             }
-          )
+          );
+
+          if (i==0 || i==2 || i==4 || i==5 || i==7 || i==9 || i==11){
+            chords.notes[i].hide = false;
+          }
         }
         resetInputs();
         chords.activate(el, chords.keys)

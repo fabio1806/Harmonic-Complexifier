@@ -79,6 +79,10 @@ div#keySel button, div#buttons button {
   border: 1px solid green;
 }
 
+.hidden {
+  display: none;
+}
+
 .durations {
   font-size: 25px;
     height: 32px;
