@@ -1,5 +1,7 @@
 const BASE_FREQ = 261.63                              //frequency of C4
 keys            = "zsxdcvgbhnjmq2w3er5t6y7ui";
+notesB          = ['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B']
+notesD          = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 
 const keySel    = document.getElementById("keySel");
 
@@ -120,16 +122,34 @@ var chords = new Vue({
         keyIndex = chords.keys.findIndex(key => key.text == el.text)
 
         chords.notes = [];
-        for (var i=0; i < chords.keys.length; i++) {
-          chords.notes.push(
-            { text: chords.keys[(i + keyIndex) % chords.keys.length].text,
-              active: false,
-              hide: true
-            }
-          );
 
-          if (i==0 || i==2 || i==4 || i==5 || i==7 || i==9 || i==11){
-            chords.notes[i].hide = false;
+        if (keyIndex == 0 || keyIndex == 2 || keyIndex == 4 || keyIndex == 6 || keyIndex == 7 || keyIndex == 9 || keyIndex == 11) {
+
+          for (var i=0; i < notesD.length; i++) {
+            chords.notes.push(
+              { text: notesD[(i + keyIndex) % notesD.length],
+                active: false,
+                hide: true
+              }
+            );
+
+            if (i==0 || i==2 || i==4 || i==5 || i==7 || i==9 || i==11){
+              chords.notes[i].hide = false;
+            }
+          }
+        }
+        else {
+          for (var i=0; i < notesB.length; i++) {
+            chords.notes.push(
+              { text: notesB[(i + keyIndex) % notesB.length],
+                active: false,
+                hide: true
+              }
+            );
+
+            if (i==0 || i==2 || i==4 || i==5 || i==7 || i==9 || i==11){
+              chords.notes[i].hide = false;
+            }
           }
         }
         resetInputs();
@@ -723,7 +743,7 @@ function chord_prog_2(input, note_labels){
   var place = chord_prog_type(input, note_labels);
   var chord_progOUT = []
   for(var k=0; k < input.length; k++){
-    if (place[k] == 1) {
+    if (place[k] == 1 && k != input.length-1) {
       el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
       el2 = {note: note_labels[9], chord: 'm7', duration: input[k].duration/2}
       chord_progOUT.push(el1);
@@ -748,7 +768,7 @@ function chord_prog_3(input, note_labels) {
         chord_progOUT.push(el1);
         chord_progOUT.push(el2);
       }
-      else if (place[k] == 1) {
+      else if (place[k] == 1 && k != input.length-1) {
         console.log(input[k]);
         el1 = {note: input[k].note, chord: input[k].chord, duration: input[k].duration/2};
         el2 = {note: note_labels[9], chord: 'm7', duration: input[k].duration/2}
@@ -874,6 +894,7 @@ function reset() {
   document.querySelector("#complexity").value = 1
   chords.stdin = [];
   resetInputs();
+  console.log("Reset all the input");
 }
 
 function closeResult() {
