@@ -543,9 +543,11 @@ function inText() {
     if (chord == null)
       chord = preview.message.split(' ')[0];
 
+    text = chord;
+
     chords.durations.forEach((time) => {
       if (time.active){
-        text = chord + ' (' + time.text + ')';
+        text += ' (' + time.text + ')';
       }
     });
 
