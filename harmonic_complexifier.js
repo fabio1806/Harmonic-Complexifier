@@ -887,11 +887,15 @@ function showResult() {
   }
 }
 
-function reset() {
+function resetKeyboard() {
   w = Array.from(document.querySelector("#keyboard").children[0].children)
   b = Array.from(document.querySelector("#keyboard").children[1].children)
   a = w.concat(b);
   a.forEach((e) => e.classList.remove("active"));
+}
+
+function reset() {
+  resetKeyboard();
   chords.keys.forEach((key) => key.active=false);
   document.querySelector("#padlock").className="fa fa-unlock";
   document.querySelector("#complexity").value = 1

@@ -67,13 +67,13 @@
         <div id="stdin">
           <div class="input" v-for="text in stdin">{{ text.note }}{{ text.chord }} (1/{{ 1/text.duration }})</div>
         </div>
-        <button id="undoBtn" onclick="undoIn();"><i class="fa fa-undo"></i></button>
+        <span class="material-icons" id="undoBtn" onclick="undoIn();">undo</span>
       </div>
       <dialog id="result">
         <h2>Result</h2>
         <div id="stdout"></div>
         <button id="save" onclick="saveOutput()">Save</button>
-        <button id="close" onclick="closeResult()">Close</button>
+        <span class="material-icons" id="close" onclick="closeResult()">clear</span>
       </dialog>
     </div>
     <div id="caption">
@@ -85,7 +85,7 @@
     <div id="inputOpt">
       <div id="preview">
         <div>{{ message }}</div>
-        <i class="fa fa-plus-square" onclick="addToStdin();"></i>
+        <span id="add_box" class="material-icons" onclick="addToStdin();">add_box</span>
       </div>
       <div id="error">
         <div v-for="err in error">{{ err }}</div>

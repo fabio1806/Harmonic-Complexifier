@@ -1,5 +1,6 @@
 @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import "https://fonts.googleapis.com/css2?family=Redressed&display=swap";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 * {
   user-select: none;
@@ -217,14 +218,14 @@ div#keySel button, div#buttons button {
   font-size: 20px;
 }
 
-.fa-plus-square {
+#add_box {
   cursor: pointer;
   position: absolute;
-  bottom: 13px;
+  bottom: 12px;
   right:10px;
 }
 
-.fa-plus-square:active {
+#add_box:active {
   transform: translate(0px, 1px);
   color: #131313
 }
@@ -255,9 +256,11 @@ div#keySel button, div#buttons button {
 #undoBtn {
   background-color: #355858;
   border-radius: 5px;
+  border-bottom: 2px solid #263656;
   position: absolute;
   bottom: 5px;
-  right: -28px;
+  right: -25px;
+  cursor: pointer;
 }
 
 .input {
@@ -298,14 +301,19 @@ dialog h2{
 
 #save {
   position: relative;
-  left: 90%;
+  left: 100%;
   transform: translate(-100%);
 }
 
 #close {
-  position: relative;
-  left: 90%;
-  transform: translate(-100%);
+  position: absolute;
+  right: 5px;
+  top: 0;
+  margin: 5px;
+}
+
+span:active{
+  transform: scale(0.95);
 }
 
 #run {
