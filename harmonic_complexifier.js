@@ -855,6 +855,7 @@ function showResult() {
         stdout.removeChild(stdout.firstChild);
 
       content = document.createElement("div");
+      content.id = "output";
       for(k=0; k < chord_progOUT3.length; k++){
         content.innerText += chord_progOUT3[k].note + chord_progOUT3[k].chord +
           "(1/" + (1/chord_progOUT3[k].duration) + ") "
@@ -895,6 +896,16 @@ function reset() {
   chords.stdin = [];
   resetInputs();
   console.log("Reset all the input");
+}
+
+function saveOutput() {
+  var textToSave = document.getElementById("stdout").firstChild.innerText;
+  var hiddenElement = document.createElement('a');
+
+  hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+  hiddenElement.target = '_blank';
+  hiddenElement.download = 'complexSequence.txt';
+  hiddenElement.click();
 }
 
 function closeResult() {

@@ -296,9 +296,15 @@ dialog h2{
   padding: 10px;
 }
 
+#save {
+  position: relative;
+  left: 90%;
+  transform: translate(-100%);
+}
+
 #close {
   position: relative;
-  left: 100%;
+  left: 90%;
   transform: translate(-100%);
 }
 
