@@ -310,6 +310,7 @@ dialog h2{
   right: 5px;
   top: 0;
   margin: 5px;
+  cursor: pointer;
 }
 
 span:active{
