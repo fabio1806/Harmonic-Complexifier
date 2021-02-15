@@ -172,10 +172,10 @@ var chords = new Vue({
   }
 })
 
-var captions = new Vue({
+var caption = new Vue({
   el: '#caption',
   data: {
-    captions: [
+    caption: [
                 {text:  'Δ = major 7th'},
                 {text:  'm7 = minor 7th'},
                 {text:  '7 = dominant 7th'},
