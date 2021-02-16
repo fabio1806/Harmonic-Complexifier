@@ -4,7 +4,7 @@
 ![Screenshot](screenshots/mainButtons.jpg)
 
 ## Introduction
-As a combined project for Advanced Coding Toold and Methodologies and Computer Music Representations and Models we developed a JavaScript-based program
+As a combined project for Advanced Coding Tools and Methodologies and Computer Music Representations and Models we developed a JavaScript-based program
 that allows to make your chord progression more elaborated.
 
 ## User Interface
@@ -60,7 +60,7 @@ If you want to remove the last chord from the progression you can do that with a
 
 ![Screenshot](screenshots/error.jpg)
 
-If you miss some input, that could it be some buttons or a key, and you try to add the new chord in the progression an error appears
+If you miss some input, that could it be some buttons or a key, and you try to add the new chord in the progression an error will appear
 
 
 ### Functional Buttons
@@ -76,5 +76,8 @@ In this section we select the number of iteration that we want to apply and when
 1. **Save:** you can export the result and download it in a text file
 2. **Close:** you close the result panel and return to the main page
 
-## Plugin Used
-We used [Vue.js](https://vuejs.org/) to managed all the input chords
+## Plugin
+We used [Vue.js](https://vuejs.org/) to manage all the input and create an object-oriented javascript code that allows us to iterate the progression and detect each time the position of the chord we want to substitute
+
+## Music Theory
+All the theory on which we based all the substitution are explained in this [presentation](https://docs.google.com/presentation/d/15w7wlq7AzPL9jqlAuF4tYUQst4Wqg-f0GrSrpnlZ3ks/edit?usp=sharing)
