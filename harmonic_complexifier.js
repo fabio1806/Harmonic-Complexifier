@@ -603,6 +603,8 @@ function addToStdin() {
         duration: duration
       });
       console.log("Added");
+      if (document.querySelector("#keyboard").style.display == 'block')
+        resetKeyboard();
     }
   }
   else {
